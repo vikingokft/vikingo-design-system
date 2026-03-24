@@ -1,5 +1,11 @@
-/* Google Fonts CDN – loaded by default; use @vikingo/ui/styles/no-cdn to skip */
-@import "./google-fonts.css";
+/* Vikingo Design System – No CDN variant
+ *
+ * Same as globals.css but WITHOUT the Google Fonts CDN @import.
+ * Use this for Chrome Extensions, offline apps, or when you load
+ * DM Sans / DM Mono via next/font/google or self-hosted woff2 files.
+ *
+ * Usage: import '@vikingo/ui/styles/no-cdn' instead of '@vikingo/ui/styles'
+ */
 @import "tailwindcss";
 @import "./fonts.css";
 @source "../**/*.{ts,tsx}";

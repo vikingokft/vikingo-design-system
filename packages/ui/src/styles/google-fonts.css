@@ -1,0 +1,10 @@
+/* Google Fonts CDN – DM Sans & DM Mono
+ *
+ * Import this file if you want the Google Fonts CDN fallback.
+ * For Next.js, use next/font/google instead for better performance.
+ * For Chrome Extensions, this may cause CSP violations — self-host the fonts instead.
+ *
+ * This is automatically included by @vikingo/ui/styles (globals.css).
+ * Use @vikingo/ui/styles/no-cdn if you want to skip this import.
+ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');

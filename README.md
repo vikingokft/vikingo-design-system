@@ -96,7 +96,7 @@ export default defineConfig({
 
 ```bash
 # 4. Install @vikingo/ui (pin to a specific version)
-pnpm add github:Vitaio/vikingo-design-system#v0.4.0
+pnpm add github:vikingokft/vikingo-design-system#v0.5.0
 ```
 
 ```tsx
@@ -165,7 +165,7 @@ export default config
 
 ```bash
 # 4. Install @vikingo/ui (pin to a specific version)
-pnpm add github:Vitaio/vikingo-design-system#v0.4.0
+pnpm add github:vikingokft/vikingo-design-system#v0.5.0
 ```
 
 ```tsx
@@ -246,7 +246,7 @@ In your main CSS file, replace the old Tailwind v3 directives:
 #### Step 2 — Install @vikingo/ui
 
 ```bash
-pnpm add github:Vitaio/vikingo-design-system#v0.4.0
+pnpm add github:vikingokft/vikingo-design-system#v0.5.0
 ```
 
 #### Step 3 — Import styles

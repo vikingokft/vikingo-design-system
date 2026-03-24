@@ -44,10 +44,18 @@ This project uses the **Vikingo Design System** (`@vikingo/ui`) with **Next.js A
 ### Installation
 
 ```bash
-# 1. Install the design system
-pnpm add github:vikingokft/vikingo-design-system#v0.5.0
+# 1. Clone and build the design system (monorepo — github: URL doesn't work directly)
+git clone https://github.com/vikingokft/vikingo-design-system.git ../vikingo-design-system
+cd ../vikingo-design-system && pnpm install && pnpm build && cd -
 
-# 2. Tailwind v4 with PostCSS (required for Next.js)
+# 2. Reference it locally in your package.json
+# Add to dependencies: "@vikingo/ui": "file:../vikingo-design-system/packages/ui"
+pnpm install
+
+# 3. Install peer dependencies (required even if unused — bundled static imports)
+pnpm add recharts react-hook-form
+
+# 4. Tailwind v4 with PostCSS (required for Next.js)
 pnpm add -D tailwindcss @tailwindcss/postcss
 ```
 

@@ -1,12 +1,25 @@
 'use client'
 
 import { AlertTriangle, CheckCircle2, Info, XCircle } from 'lucide-react'
+import type { ToasterProps as SonnerToasterProps } from 'sonner'
 import { Toaster as SonnerToaster } from 'sonner'
 
-export function Toaster() {
+export interface ToasterProps {
+  /** Toast position on screen. Default: `'bottom-right'` */
+  position?: SonnerToasterProps['position']
+}
+
+/**
+ * Global toast container. Place once in your root layout.
+ *
+ * @example
+ * <Toaster />
+ * <Toaster position="top-center" /> // Chrome extension popups
+ */
+export const Toaster = ({ position = 'bottom-right' }: ToasterProps) => {
   return (
     <SonnerToaster
-      position="bottom-right"
+      position={position}
       toastOptions={{
         style: {
           background: 'var(--color-surface)',

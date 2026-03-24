@@ -16,6 +16,14 @@
       "source": "./src/styles/globals.css",
       "default": "./dist/globals.css"
     },
+    "./styles/no-cdn": {
+      "source": "./src/styles/globals-no-cdn.css",
+      "default": "./dist/globals-no-cdn.css"
+    },
+    "./styles/google-fonts": {
+      "source": "./src/styles/google-fonts.css",
+      "default": "./dist/google-fonts.css"
+    },
     "./fonts": "./dist/fonts.css"
   },
   "files": [
@@ -40,8 +48,12 @@
     "react-hook-form": ">=7"
   },
   "peerDependenciesMeta": {
-    "recharts": { "optional": true },
-    "react-hook-form": { "optional": true }
+    "recharts": {
+      "optional": true
+    },
+    "react-hook-form": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

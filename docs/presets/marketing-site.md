@@ -41,8 +41,16 @@ cd my-site
 # 2. Install Tailwind
 pnpm add -D tailwindcss @tailwindcss/vite
 
-# 3. Install the design system
-pnpm add github:vikingokft/vikingo-design-system#v0.5.0
+# 3. Clone and build the design system (monorepo — github: URL doesn't work directly)
+git clone https://github.com/vikingokft/vikingo-design-system.git ../vikingo-design-system
+cd ../vikingo-design-system && pnpm install && pnpm build && cd -
+
+# 4. Reference it locally in your package.json
+# Add to dependencies: "@vikingo/ui": "file:../vikingo-design-system/packages/ui"
+pnpm install
+
+# 5. Install peer dependencies (required even if unused — bundled static imports)
+pnpm add recharts react-hook-form
 ```
 
 ```ts

@@ -39,34 +39,53 @@ Use these components in popup, sidebar, and options pages. **Avoid** full-page l
 
 ## Platform Setup
 
-### Project Structure (Vite + CRXJS)
+### Installation
+
+The design system lives in a monorepo. For Chrome extensions, use a **local file reference** (the `github:` install method installs the monorepo root, not the `packages/ui` subpackage):
 
 ```bash
-# 1. Create project
-pnpm create vite my-extension --template react-ts
-cd my-extension
+# 1. Clone the design system next to your project
+git clone https://github.com/vikingokft/vikingo-design-system.git ../vikingo-design-system
+cd ../vikingo-design-system && pnpm install && pnpm build && cd -
 
-# 2. Install CRXJS and Tailwind
-pnpm add -D @crxjs/vite-plugin@beta tailwindcss @tailwindcss/vite
-
-# 3. Install the design system
-pnpm add github:vikingokft/vikingo-design-system#v0.5.0
+# 2. Reference it locally in your package.json
+# Add to dependencies: "@vikingo/ui": "file:../vikingo-design-system/packages/ui"
+pnpm install
 ```
 
-### Vite Config
+**Required peer dependencies:** Even if you don't use charts or forms, the bundled `@vikingo/ui` statically imports `recharts` and `react-hook-form`. You **must** install them to avoid Vite/Rollup build errors:
+
+```bash
+pnpm add recharts react-hook-form
+```
+
+### Vite Config (without CRXJS)
+
+> **Note:** `@crxjs/vite-plugin` (beta) has compatibility issues with Vite 5+/6 (ESM service worker MIME type errors). Use a plain Vite multi-page build instead:
 
 ```ts
 // vite.config.ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import crx from '@crxjs/vite-plugin'
-import manifest from './manifest.json'
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), crx({ manifest })],
+  plugins: [react(), tailwindcss()],
+  base: './',
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        popup: 'index.html',
+        // sidepanel: 'sidepanel.html',  // if using side panel
+        // options: 'options.html',      // if using options page
+      },
+    },
+  },
 })
 ```
+
+After `pnpm build`, copy your `manifest.json` and any static assets into `dist/`, then load `dist/` as an unpacked extension in `chrome://extensions`.
 
 ### Manifest v3
 
@@ -80,16 +99,23 @@ export default defineConfig({
   },
   "permissions": [],
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com"
+    "extension_pages": "script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
   }
 }
 ```
 
-### Entry Point
+**CSP breakdown:**
+- `style-src 'unsafe-inline'` — required for Tailwind's inline styles
+- `style-src https://fonts.googleapis.com` — required for Google Fonts CSS (DM Sans, DM Mono)
+- `font-src https://fonts.gstatic.com` — required for Google Fonts woff2 files
+
+### Entry Point & Styles
+
+Use the **CDN-free** styles variant to avoid CSP issues with the Google Fonts `@import`:
 
 ```tsx
 // src/main.tsx
-import '@vikingo/ui/styles'
+import '@vikingo/ui/styles/no-cdn'  // ← No Google Fonts CDN @import
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
@@ -101,6 +127,20 @@ createRoot(document.getElementById('root')!).render(
 )
 ```
 
+**`@vikingo/ui/styles/no-cdn`** is identical to `@vikingo/ui/styles` but without the Google Fonts CDN `@import`. This means:
+- **Clash Display** — works (self-hosted woff2 inside the package)
+- **DM Sans & DM Mono** — you must load them yourself:
+
+**Option A: Allow Google Fonts in CSP** (easiest)
+```css
+/* Add to your app's CSS, BEFORE the @vikingo/ui import */
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap');
+```
+And add `https://fonts.googleapis.com` to `style-src` and `https://fonts.gstatic.com` to `font-src` in the manifest CSP.
+
+**Option B: Self-host the fonts** (no external requests)
+Download DM Sans and DM Mono woff2 files from Google Fonts, place them in `src/fonts/`, and add `@font-face` declarations in a local CSS file.
+
 ---
 
 ## Import Pattern
@@ -111,7 +151,7 @@ import { Button, Input, Card, Dialog, toast, Toaster } from '@vikingo/ui'
 
 Styles must be imported once in the entry point:
 ```tsx
-import '@vikingo/ui/styles'
+import '@vikingo/ui/styles/no-cdn'  // CDN-free for Chrome Extensions
 ```
 
 ---
@@ -126,13 +166,7 @@ import '@vikingo/ui/styles'
 
 Clash Display is self-hosted inside the package (works without CSP issues).
 
-**DM Sans & DM Mono:** Google Fonts CDN is allowed if you add `https://fonts.gstatic.com` to `font-src` in the manifest CSP. If CSP is too restrictive, download the fonts and self-host them:
-
-```bash
-# Download and place in src/fonts/
-mkdir -p src/fonts
-# Add @font-face declarations in a local CSS file
-```
+DM Sans & DM Mono require either Google Fonts CDN (with CSP allowance) or self-hosting. See the [Entry Point & Styles](#entry-point--styles) section above.
 
 ---
 
@@ -182,7 +216,7 @@ Popups have a fixed max size (~400x600px). Design for compact layouts:
 
 ```tsx
 // src/App.tsx
-import { Card, Button, Input, Toaster } from '@vikingo/ui'
+import { Button, Input, Logo, Toaster } from '@vikingo/ui'
 
 export default function App() {
   return (
@@ -220,7 +254,7 @@ For injecting UI into web pages, use Shadow DOM to isolate Vikingo styles from t
 
 ```tsx
 // content-script.tsx
-import css from '@vikingo/ui/styles?inline'
+import css from '@vikingo/ui/styles/no-cdn?inline'
 
 const host = document.createElement('div')
 document.body.appendChild(host)
@@ -353,11 +387,23 @@ import { Button } from '@vikingo/ui'
 import { PageLayout, Sidebar } from '@vikingo/ui'
 // These are for full-screen apps, not 400px popups
 
+// ❌ Don't use @vikingo/ui/styles (includes Google Fonts CDN @import → CSP violation)
+import '@vikingo/ui/styles'
+
+// ✅ Use the CDN-free variant
+import '@vikingo/ui/styles/no-cdn'
+
 // ❌ Don't inject Vikingo styles into the host page (content scripts)
-import '@vikingo/ui/styles' // This pollutes the host page!
+// This pollutes the host page!
 
 // ✅ Use Shadow DOM isolation for content scripts
 const shadow = host.attachShadow({ mode: 'open' })
+
+// ❌ Don't install via github: URL (installs the monorepo root, not packages/ui)
+// "@vikingo/ui": "github:vikingokft/vikingo-design-system#v0.5.0"
+
+// ✅ Use local file reference
+// "@vikingo/ui": "file:../vikingo-design-system/packages/ui"
 ```
 
 ---
@@ -365,9 +411,12 @@ const shadow = host.attachShadow({ mode: 'open' })
 ## Chrome Extension Gotchas
 
 - **Popup size:** Chrome popups max out at ~800x600px (varies by OS). Design for 360px width.
-- **CSP:** `unsafe-inline` styles are needed for Tailwind. Add it to `style-src` in the manifest.
-- **Portals:** Radix UI portals (Dialog, Tooltip, Popover) attach to `document.body`. In Shadow DOM, you must override the portal container.
-- **Hot reload:** CRXJS supports HMR in development. After `pnpm build`, reload the extension manually in `chrome://extensions`.
+- **CSP & Google Fonts:** The default `@vikingo/ui/styles` imports Google Fonts via CDN, which causes CSP violations. Use `@vikingo/ui/styles/no-cdn` instead, and load DM Sans/DM Mono separately (via CSP-allowed CDN or self-hosted woff2).
+- **Peer dependencies:** `recharts` and `react-hook-form` must be installed even if unused — the main bundle statically imports them. Run `pnpm add recharts react-hook-form`.
+- **Installation:** Use `"file:../vikingo-design-system/packages/ui"` in package.json, not `"github:..."` — the GitHub URL installs the monorepo root which doesn't contain the built `dist/`.
+- **CRXJS:** `@crxjs/vite-plugin@beta` has known compatibility issues with Vite 5+/6 (ESM service worker MIME type errors). Use a plain Vite multi-page build with `base: './'` instead.
+- **Portals:** Radix UI portals (Dialog, Tooltip, Popover) attach to `document.body`. In Shadow DOM content scripts, you must override the portal container.
+- **Background scripts:** Keep the service worker (background script) standalone — don't import shared modules, as the CRXJS loader can fail with MIME type errors.
 - **Storage:** Use `chrome.storage` instead of `localStorage` for data that needs to sync across devices.
 - **No SSR:** Chrome extensions are purely client-side. No need for 'use client' directives.
-- **Bundle size:** Extensions are loaded locally, so bundle size matters less than network-loaded apps. However, avoid importing the full chart library if you don't need charts.
+- **Bundle size:** Extensions are loaded locally, so bundle size matters less than network-loaded apps. However, avoid importing chart components if you don't need charts (they pull in recharts ~150KB).
