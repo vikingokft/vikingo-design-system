@@ -14,7 +14,7 @@ A versioned, reusable React component library built for Vikingo SaaS products. B
 | Components | React 19 + TypeScript |
 | Styling | Tailwind CSS v4 |
 | Primitives | Radix UI |
-| Icons | Lucide React |
+| Icons | [Lucide React](https://lucide.dev/icons/) |
 | Docs | Storybook 8 |
 | Build | tsup (ESM + CJS dual output) |
 
@@ -26,19 +26,37 @@ A versioned, reusable React component library built for Vikingo SaaS products. B
 - **Background light:** `#F6EFE8` (beige)
 - **Text / Sidebar:** `#3E2E45` (dark purple)
 - **Dark background:** `#2A1F30`
-- **Display font:** Clash Display 600 (self-hosted)
-- **Body font:** DM Sans (Google Fonts CDN)
-- **Mono font:** DM Mono (Google Fonts CDN)
+- **Display font:** [Clash Display](https://www.fontshare.com/fonts/clash-display) 600 (self-hosted woff2, Fontshare license)
+- **Body font:** [DM Sans](https://fonts.google.com/specimen/DM+Sans) (Google Fonts CDN, OFL)
+- **Mono font:** [DM Mono](https://fonts.google.com/specimen/DM+Mono) (Google Fonts CDN, OFL)
 
 ---
 
 ## Using with Claude Code
 
-Copy [`CONSUMER_CLAUDE.md`](./CONSUMER_CLAUDE.md) into your project root as `CLAUDE.md`. This tells Claude Code all the rules: which components exist, how to import them, what patterns to use, and what NOT to do.
+Copy the appropriate preset into your project root as `CLAUDE.md`. This tells Claude Code all the rules: which components exist, how to import them, what patterns to use, and what NOT to do.
+
+### Platform Presets
+
+| Preset | Use When |
+|---|---|
+| [`CONSUMER_CLAUDE.md`](./CONSUMER_CLAUDE.md) | Generic — Vite + React SPA (default) |
+| [`docs/presets/nextjs.md`](./docs/presets/nextjs.md) | Next.js App Router (SSR, `'use client'`, `next/font`) |
+| [`docs/presets/chrome-extension.md`](./docs/presets/chrome-extension.md) | Chrome Extension (Manifest v3, Shadow DOM, CSP) |
+| [`docs/presets/marketing-site.md`](./docs/presets/marketing-site.md) | Marketing / Landing Page (SEO, performance, minimal JS) |
 
 ```bash
-# In your new project root:
-curl -o CLAUDE.md https://raw.githubusercontent.com/Vitaio/vikingo-design-system/main/CONSUMER_CLAUDE.md
+# Generic (Vite + React) — the default
+curl -o CLAUDE.md https://raw.githubusercontent.com/vikingokft/vikingo-design-system/main/CONSUMER_CLAUDE.md
+
+# Next.js
+curl -o CLAUDE.md https://raw.githubusercontent.com/vikingokft/vikingo-design-system/main/docs/presets/nextjs.md
+
+# Chrome Extension
+curl -o CLAUDE.md https://raw.githubusercontent.com/vikingokft/vikingo-design-system/main/docs/presets/chrome-extension.md
+
+# Marketing Site
+curl -o CLAUDE.md https://raw.githubusercontent.com/vikingokft/vikingo-design-system/main/docs/presets/marketing-site.md
 ```
 
 ---
@@ -430,7 +448,7 @@ vikingo-design-system/
     └── storybook/             # Storybook 8 documentation
         ├── .storybook/
         └── stories/
-            ├── tokens/        # Colors, Typography, Spacing, Icons
+            ├── tokens/        # Colors, Typography, Spacing
             ├── ui/            # All component stories
             └── layout/        # Layout stories
 ```

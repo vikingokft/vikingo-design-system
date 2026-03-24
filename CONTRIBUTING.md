@@ -181,6 +181,22 @@ export const Secondary: Story = {
 
 ---
 
+## Maintaining Platform Presets
+
+Platform-specific consumer presets live in `docs/presets/`. Each preset is a **self-contained** `CLAUDE.md` file that includes the base rules + platform-specific guidance.
+
+**When to update all presets:**
+- Adding or removing a component from the "Available Components" list
+- Adding a new CSS custom property
+- Adding a new common pattern
+
+**When adding a new preset:**
+1. Create `docs/presets/<platform>.md` following the existing preset structure
+2. Add it to `docs/presets/README.md`
+3. Add it to the "Platform Presets" table in `README.md`
+
+---
+
 ## Releasing
 
 1. Bump `version` in `packages/ui/package.json`

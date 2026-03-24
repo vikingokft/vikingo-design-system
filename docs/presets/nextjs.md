@@ -1,8 +1,7 @@
 # Project Rules for Claude Code
+# Platform: Next.js (App Router)
 
-> This is the **generic (Vite + React)** preset. For platform-specific presets (Next.js, Chrome Extension, Marketing Site), see [`docs/presets/`](./docs/presets/).
-
-This project uses the **Vikingo Design System** (`@vikingo/ui`).
+This project uses the **Vikingo Design System** (`@vikingo/ui`) with **Next.js App Router**.
 
 ## Core Rules
 
@@ -40,22 +39,131 @@ This project uses the **Vikingo Design System** (`@vikingo/ui`).
 
 ---
 
+## Platform Setup
+
+### Installation
+
+```bash
+# 1. Install the design system
+pnpm add github:vikingokft/vikingo-design-system#v0.5.0
+
+# 2. Tailwind v4 with PostCSS (required for Next.js)
+pnpm add -D tailwindcss @tailwindcss/postcss
+```
+
+### PostCSS Config
+
+```js
+// postcss.config.mjs
+const config = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+}
+export default config
+```
+
+### Font Loading (next/font)
+
+Use `next/font` for optimal font loading instead of the Google Fonts CDN fallback:
+
+```tsx
+// app/fonts.ts
+import { DM_Sans, DM_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
+
+export const clashDisplay = localFont({
+  src: '../node_modules/@vikingo/ui/assets/fonts/ClashDisplay-Variable.woff2',
+  variable: '--font-display',
+  display: 'swap',
+  weight: '100 700',
+})
+
+export const dmSans = DM_Sans({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
+export const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+```
+
+### Root Layout
+
+```tsx
+// app/layout.tsx
+import '@vikingo/ui/styles'
+import { Toaster } from '@vikingo/ui'
+import { clashDisplay, dmSans, dmMono } from './fonts'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = { title: 'My App' }
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="hu" className={`${clashDisplay.variable} ${dmSans.variable} ${dmMono.variable}`}>
+      <body>
+        <Toaster />
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+---
+
 ## Import Pattern
 
 ```tsx
 import { Button, Input, Card, Dialog, toast, Toaster } from '@vikingo/ui'
 ```
 
-Styles must be imported once in the entry point (already done in this project):
+### 'use client' Directive
+
+All interactive Vikingo components are client components. Any page or component that **uses** them must have `'use client'` at the top, unless it's already inside a client boundary.
+
+**Interactive (need 'use client'):** `Button` `Input` `NumberInput` `Textarea` `Select` `Checkbox` `Switch` `RadioGroup` `RadioButton` `Slider` `Chip` `ChipGroup` `DatePicker` `DateRangePicker` `SearchBar` `FileUpload` `Combobox` `TagsInput` `CopyButton` `SegmentedControl` `Dialog` `Drawer` `Tooltip` `DropdownMenu` `CommandPalette` `ConfirmDialog` `Popover` `Tabs` `Accordion` `Pagination` `Carousel` `DataTable` `Form` `Toaster` `toast`
+
+**Static (safe in Server Components):** `Badge` `Card` `Alert` `Avatar` `Progress` `Skeleton` `Separator` `EmptyState` `Logo` `Table` `StatCard` `PageHeader`
+
 ```tsx
-import '@vikingo/ui/styles'
+// app/dashboard/page.tsx — Server Component (static only)
+import { Card, Badge, StatCard, PageHeader } from '@vikingo/ui'
+
+export default function DashboardPage() {
+  return (
+    <>
+      <PageHeader title="Dashboard" />
+      <Card><Badge variant="success">Active</Badge></Card>
+    </>
+  )
+}
+```
+
+```tsx
+// app/dashboard/client-section.tsx — Client Component (interactive)
+'use client'
+import { Button, Input, toast } from '@vikingo/ui'
+
+export function ClientSection() {
+  return (
+    <div>
+      <Input label="Name" />
+      <Button onClick={() => toast.success('Saved!')}>Save</Button>
+    </div>
+  )
+}
 ```
 
 ---
 
 ## Fonts
-
-The design system ships three font families (already loaded by `@vikingo/ui/styles`):
 
 | Font | CSS Variable | Tailwind Class | Usage |
 |---|---|---|---|
@@ -63,13 +171,7 @@ The design system ships three font families (already loaded by `@vikingo/ui/styl
 | [DM Sans](https://fonts.google.com/specimen/DM+Sans) | `--font-body` | `font-body` | Body text, labels, buttons |
 | [DM Mono](https://fonts.google.com/specimen/DM+Mono) | `--font-mono` | `font-mono` | Data, code, badges, KPIs |
 
-Clash Display is self-hosted inside the package. DM Sans and DM Mono load from Google Fonts CDN (or use `next/font/google` for optimization).
-
-```tsx
-<h1 className="font-display font-semibold text-2xl">Heading</h1>
-<p className="font-body text-sm">Body text</p>
-<span className="font-mono text-xs">123,456</span>
-```
+With `next/font`, fonts are self-hosted and optimized automatically — no external CDN requests.
 
 ---
 
@@ -80,13 +182,8 @@ The design system uses **[Lucide React](https://lucide.dev/icons/)** for icons. 
 ```tsx
 import { Search, Plus, Trash2, ChevronDown } from 'lucide-react'
 
-// Standard size for inline use
 <Search size={16} />
-
-// In buttons
 <Button variant="ghost" size="icon"><Trash2 size={18} /></Button>
-
-// Color via CSS custom properties
 <Search className="text-[var(--color-text-muted)]" size={16} />
 ```
 
@@ -139,6 +236,7 @@ Available CSS custom properties:
 
 ### Form (react-hook-form + zod)
 ```tsx
+'use client'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -179,6 +277,7 @@ toast.warning('Lejáró előfizetés.')
 
 ### Dialog
 ```tsx
+'use client'
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogFooter, Button } from '@vikingo/ui'
 
 <Dialog>
@@ -191,44 +290,9 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 </Dialog>
 ```
 
-### Confirm Dialog (destructive actions)
-```tsx
-import { ConfirmDialog } from '@vikingo/ui'
-
-<ConfirmDialog
-  trigger={<Button variant="destructive">Törlés</Button>}
-  title="Biztosan törlöd?"
-  description="Ez a művelet nem vonható vissza."
-  confirmLabel="Törlés"
-  variant="destructive"
-  onConfirm={async () => { await deleteItem() }}
-/>
-```
-
-### Table
-```tsx
-import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from '@vikingo/ui'
-
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Név</TableHead>
-      <TableHead>Email</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    {rows.map(row => (
-      <TableRow key={row.id}>
-        <TableCell>{row.name}</TableCell>
-        <TableCell>{row.email}</TableCell>
-      </TableRow>
-    ))}
-  </TableBody>
-</Table>
-```
-
 ### DataTable (sorting, search, pagination)
 ```tsx
+'use client'
 import { DataTable, type ColumnDef, Badge } from '@vikingo/ui'
 
 interface User { id: number; name: string; status: 'active' | 'inactive' }
@@ -258,81 +322,21 @@ const columns: ColumnDef<User>[] = [
 />
 ```
 
-### SegmentedControl
-```tsx
-import { SegmentedControl } from '@vikingo/ui'
-import { List, LayoutGrid } from 'lucide-react'
-
-// Icon + label
-<SegmentedControl
-  options={[
-    { value: 'list', icon: <List className="h-4 w-4" />, label: 'Lista' },
-    { value: 'grid', icon: <LayoutGrid className="h-4 w-4" />, label: 'Rács' },
-  ]}
-  value={view}
-  onChange={setView}
-/>
-
-// Text only
-<SegmentedControl
-  options={[
-    { value: 'day', label: 'Nap' },
-    { value: 'week', label: 'Hét' },
-    { value: 'month', label: 'Hónap' },
-  ]}
-  defaultValue="week"
-  onChange={setPeriod}
-/>
-```
-
-### Popover
-```tsx
-import { Popover, PopoverTrigger, PopoverContent, Button } from '@vikingo/ui'
-
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="secondary">Megnyit</Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-64">
-    <p className="text-sm">Bármilyen tartalom kerülhet ide.</p>
-  </PopoverContent>
-</Popover>
-```
-
-### TagsInput
-```tsx
-import { TagsInput } from '@vikingo/ui'
-
-<TagsInput
-  label="Cimkék"
-  placeholder="Írj és nyomj Entert..."
-  value={tags}
-  onChange={setTags}
-  hint="Enter vagy vesszővel adj hozzá."
-/>
-```
-
-### Dark Mode
-```ts
-document.documentElement.classList.toggle('dark')
-// or
-document.documentElement.classList.add('dark')
-document.documentElement.classList.remove('dark')
-```
-
 ---
 
 ## Layout (App Shell)
 
 ```tsx
+'use client'
 import { PageLayout, PageContent, Sidebar, Topbar, Logo } from '@vikingo/ui'
+import { LayoutDashboard, Users } from 'lucide-react'
 
 const navItems = [
   { label: 'Dashboard', href: '/', icon: <LayoutDashboard size={18} /> },
   { label: 'Ügyfelek', href: '/clients', icon: <Users size={18} /> },
 ]
 
-export default function AppShell({ children }) {
+export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <PageLayout>
       <Sidebar logo={<Logo />} navItems={navItems} />
@@ -342,6 +346,51 @@ export default function AppShell({ children }) {
       </PageContent>
     </PageLayout>
   )
+}
+```
+
+Place the AppShell in `app/layout.tsx` or a layout group like `app/(app)/layout.tsx`.
+
+---
+
+## Dark Mode
+
+For SSR, avoid hydration mismatch by reading the theme from a cookie:
+
+```tsx
+// lib/theme.ts
+'use server'
+import { cookies } from 'next/headers'
+
+export async function getTheme() {
+  const cookieStore = await cookies()
+  return cookieStore.get('theme')?.value ?? 'light'
+}
+```
+
+```tsx
+// app/layout.tsx
+import { getTheme } from '@/lib/theme'
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const theme = await getTheme()
+  return (
+    <html lang="hu" className={theme === 'dark' ? 'dark' : ''}>
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+```tsx
+// components/theme-toggle.tsx
+'use client'
+export function ThemeToggle() {
+  function toggle() {
+    const next = document.documentElement.classList.toggle('dark') ? 'dark' : 'light'
+    document.cookie = `theme=${next};path=/;max-age=31536000`
+  }
+  return <Button variant="ghost" size="icon" onClick={toggle}><Sun size={18} /></Button>
 }
 ```
 
@@ -370,4 +419,23 @@ npx shadcn-ui add button
 
 // ✅ Already in @vikingo/ui
 import { Button } from '@vikingo/ui'
+
+// ❌ Don't use interactive components in Server Components without 'use client'
+// This will cause a runtime error
+import { Button } from '@vikingo/ui'
+export default function Page() { return <Button>Click</Button> } // ERROR
+
+// ✅ Add 'use client' or wrap in a client component
+'use client'
+import { Button } from '@vikingo/ui'
+export default function Page() { return <Button>Click</Button> } // OK
 ```
+
+---
+
+## Next.js Gotchas
+
+- **Image optimization:** Use `next/image` for raster images. `ImageCard` accepts children — put `<Image />` inside it.
+- **Route transitions:** Vikingo has no built-in page transition support. Use Next.js `loading.tsx` with `<Skeleton />` for loading states.
+- **Metadata:** Use Next.js `metadata` exports, not custom `<head>` tags. Vikingo components don't manage `<head>`.
+- **API Routes:** Never import `@vikingo/ui` in API routes or server actions — it's a client-side React library.
