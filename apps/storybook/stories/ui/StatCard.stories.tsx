@@ -101,12 +101,7 @@ export const KPIGrid: Story = {
         sublabel="133 új vásárló"
         tooltip="Ügyfélszerzési költség"
       />
-      <StatCard
-        label="ROAS"
-        value="0,17x"
-        sublabel="Churn: 7,90%"
-        tooltip="Hirdetési megtérülés"
-      />
+      <StatCard label="ROAS" value="0,17x" sublabel="Churn: 7,90%" tooltip="Hirdetési megtérülés" />
     </div>
   ),
 }

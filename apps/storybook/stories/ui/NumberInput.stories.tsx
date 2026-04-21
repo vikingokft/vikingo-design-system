@@ -66,13 +66,7 @@ export const Controlled: Story = {
     const [val, setVal] = useState(3)
     return (
       <div className="flex flex-col gap-3 w-64">
-        <NumberInput
-          label="Kontrollált érték"
-          value={val}
-          onChange={setVal}
-          min={0}
-          max={20}
-        />
+        <NumberInput label="Kontrollált érték" value={val} onChange={setVal} min={0} max={20} />
         <p className="text-sm text-[var(--color-text-muted)]">Jelenlegi érték: {val}</p>
       </div>
     )

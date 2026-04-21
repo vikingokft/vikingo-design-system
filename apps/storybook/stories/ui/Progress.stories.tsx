@@ -46,17 +46,17 @@ export const BudgetTracking: Story = {
 
     return (
       <div className="flex flex-col gap-4 w-80 p-6 bg-[var(--color-bg)]">
-        <h3 className="font-display font-semibold text-sm text-[var(--color-text)]">Büdzsé felhasználás</h3>
-        {campaigns.map(c => {
+        <h3 className="font-display font-semibold text-sm text-[var(--color-text)]">
+          Büdzsé felhasználás
+        </h3>
+        {campaigns.map((c) => {
           const pct = Math.round((c.spent / c.budget) * 100)
           const variant = pct >= 90 ? 'error' : pct >= 70 ? 'warning' : 'accent'
           return (
             <div key={c.name} className="flex flex-col gap-1.5">
               <div className="flex justify-between items-baseline">
                 <span className="text-sm text-[var(--color-text)]">{c.name}</span>
-                <span className="text-xs font-mono text-[var(--color-text-muted)]">
-                  {pct}%
-                </span>
+                <span className="text-xs font-mono text-[var(--color-text-muted)]">{pct}%</span>
               </div>
               <Progress variant={variant} value={pct} />
               <p className="text-[10px] font-mono text-[var(--color-text-subtle)]">

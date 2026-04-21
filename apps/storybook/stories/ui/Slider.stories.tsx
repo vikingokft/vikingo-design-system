@@ -30,11 +30,13 @@ export const Variants: Story = {
   name: 'Variants · Variánsok',
   render: () => (
     <div className="flex flex-col gap-6 w-72 p-6 bg-[var(--color-bg)]">
-      {([
-        { variant: 'accent', label: 'Accent', value: [65] as number[] },
-        { variant: 'success', label: 'Success', value: [80] as number[] },
-        { variant: 'default', label: 'Default', value: [45] as number[] },
-      ] as const).map(({ variant, label, value }) => (
+      {(
+        [
+          { variant: 'accent', label: 'Accent', value: [65] as number[] },
+          { variant: 'success', label: 'Success', value: [80] as number[] },
+          { variant: 'default', label: 'Default', value: [45] as number[] },
+        ] as const
+      ).map(({ variant, label, value }) => (
         <div key={variant}>
           <div className="flex justify-between mb-2">
             <span className="text-sm text-[var(--color-text)]">{label}</span>
@@ -55,7 +57,9 @@ export const BudgetSettings: Story = {
 
     return (
       <div className="flex flex-col gap-6 w-80 p-6 bg-[var(--color-bg)]">
-        <h3 className="font-display font-semibold text-sm text-[var(--color-text)]">Kampány beállítások</h3>
+        <h3 className="font-display font-semibold text-sm text-[var(--color-text)]">
+          Kampány beállítások
+        </h3>
 
         <div>
           <div className="flex justify-between mb-2">
@@ -73,7 +77,9 @@ export const BudgetSettings: Story = {
 
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm font-medium text-[var(--color-text)]">Heti frekvencia limit</span>
+            <span className="text-sm font-medium text-[var(--color-text)]">
+              Heti frekvencia limit
+            </span>
             <span className="text-sm font-mono text-[var(--color-accent)]">{freq[0]}x</span>
           </div>
           <Slider value={freq} onValueChange={setFreq} min={1} max={7} step={1} />

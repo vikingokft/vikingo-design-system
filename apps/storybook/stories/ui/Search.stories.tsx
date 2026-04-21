@@ -17,11 +17,7 @@ export const Default: Story = {
     const [value, setValue] = useState('')
     return (
       <div className="w-80 p-6 bg-[var(--color-bg)]">
-        <SearchBar
-          value={value}
-          onChange={setValue}
-          placeholder="Keresés..."
-        />
+        <SearchBar value={value} onChange={setValue} placeholder="Keresés..." />
       </div>
     )
   },
@@ -32,7 +28,9 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4 w-80 p-6 bg-[var(--color-bg)]">
       <div>
-        <p className="text-xs font-mono text-[var(--color-text-muted)] mb-2">field (alapértelmezett)</p>
+        <p className="text-xs font-mono text-[var(--color-text-muted)] mb-2">
+          field (alapértelmezett)
+        </p>
         <SearchBar placeholder="Keresés..." variant="field" />
       </div>
       <div>
@@ -60,28 +58,79 @@ export const Loading: Story = {
     const [value, setValue] = useState('TikTok')
     return (
       <div className="w-80 p-6 bg-[var(--color-bg)]">
-        <SearchBar
-          value={value}
-          onChange={setValue}
-          loading
-          placeholder="Keresés..."
-        />
-        <p className="text-xs text-[var(--color-text-muted)] mt-2">Keresési eredmények betöltése...</p>
+        <SearchBar value={value} onChange={setValue} loading placeholder="Keresés..." />
+        <p className="text-xs text-[var(--color-text-muted)] mt-2">
+          Keresési eredmények betöltése...
+        </p>
       </div>
     )
   },
 }
 
 const ALL_RESULTS: SearchResult[] = [
-  { id: '1', label: 'Nyári akció 2025', description: 'Facebook Ads · carousel', icon: <Megaphone className="h-4 w-4" />, category: 'Kampányok' },
-  { id: '2', label: 'Google Brand Awareness', description: 'Google Ads · display', icon: <Globe className="h-4 w-4" />, category: 'Kampányok' },
-  { id: '3', label: 'TikTok Flash Sale', description: 'TikTok Ads · reel', icon: <Megaphone className="h-4 w-4" />, category: 'Kampányok' },
-  { id: '4', label: 'Konverziós riport – május', description: '2025. máj. 1–31.', icon: <BarChart2 className="h-4 w-4" />, category: 'Riportok' },
-  { id: '5', label: 'ROAS összesítő – Q1', description: '2025. jan–márc', icon: <BarChart2 className="h-4 w-4" />, category: 'Riportok' },
-  { id: '6', label: 'Hirdetés #001 – Nyári banner', description: '1200×628 px · feed', icon: <Image className="h-4 w-4" />, category: 'Hirdetések' },
-  { id: '7', label: 'Hirdetés #012 – Story reel', description: '1080×1920 px · story', icon: <Image className="h-4 w-4" />, category: 'Hirdetések' },
-  { id: '8', label: 'Nagy Bence', description: 'admin · bence@vikingo.hu', icon: <Users className="h-4 w-4" />, category: 'Felhasználók' },
-  { id: '9', label: 'API beállítások', description: 'Meta Marketing API konfig', icon: <Settings className="h-4 w-4" />, category: 'Beállítások' },
+  {
+    id: '1',
+    label: 'Nyári akció 2025',
+    description: 'Facebook Ads · carousel',
+    icon: <Megaphone className="h-4 w-4" />,
+    category: 'Kampányok',
+  },
+  {
+    id: '2',
+    label: 'Google Brand Awareness',
+    description: 'Google Ads · display',
+    icon: <Globe className="h-4 w-4" />,
+    category: 'Kampányok',
+  },
+  {
+    id: '3',
+    label: 'TikTok Flash Sale',
+    description: 'TikTok Ads · reel',
+    icon: <Megaphone className="h-4 w-4" />,
+    category: 'Kampányok',
+  },
+  {
+    id: '4',
+    label: 'Konverziós riport – május',
+    description: '2025. máj. 1–31.',
+    icon: <BarChart2 className="h-4 w-4" />,
+    category: 'Riportok',
+  },
+  {
+    id: '5',
+    label: 'ROAS összesítő – Q1',
+    description: '2025. jan–márc',
+    icon: <BarChart2 className="h-4 w-4" />,
+    category: 'Riportok',
+  },
+  {
+    id: '6',
+    label: 'Hirdetés #001 – Nyári banner',
+    description: '1200×628 px · feed',
+    icon: <Image className="h-4 w-4" />,
+    category: 'Hirdetések',
+  },
+  {
+    id: '7',
+    label: 'Hirdetés #012 – Story reel',
+    description: '1080×1920 px · story',
+    icon: <Image className="h-4 w-4" />,
+    category: 'Hirdetések',
+  },
+  {
+    id: '8',
+    label: 'Nagy Bence',
+    description: 'admin · bence@vikingo.hu',
+    icon: <Users className="h-4 w-4" />,
+    category: 'Felhasználók',
+  },
+  {
+    id: '9',
+    label: 'API beállítások',
+    description: 'Meta Marketing API konfig',
+    icon: <Settings className="h-4 w-4" />,
+    category: 'Beállítások',
+  },
 ]
 
 export const WithResults: Story = {
@@ -93,9 +142,8 @@ export const WithResults: Story = {
     const results = useMemo(() => {
       if (!value.trim()) return []
       const q = value.toLowerCase()
-      return ALL_RESULTS.filter(r =>
-        r.label.toLowerCase().includes(q) ||
-        r.description?.toLowerCase().includes(q)
+      return ALL_RESULTS.filter(
+        (r) => r.label.toLowerCase().includes(q) || r.description?.toLowerCase().includes(q),
       )
     }, [value])
 
@@ -105,18 +153,25 @@ export const WithResults: Story = {
           value={value}
           onChange={setValue}
           results={results}
-          onResultSelect={(r) => { setSelected(r); setValue(r.label) }}
+          onResultSelect={(r) => {
+            setSelected(r)
+            setValue(r.label)
+          }}
           placeholder="Keresés a rendszerben..."
           size="md"
           variant="field"
         />
         {selected && !value.startsWith(selected.label.slice(0, 3)) && (
           <div className="mt-3 p-3 rounded-[var(--radius-md)] bg-[var(--color-accent-muted)] border border-[var(--color-accent)]/20">
-            <p className="text-xs font-mono text-[var(--color-accent)]">Kiválasztva: {selected.label}</p>
+            <p className="text-xs font-mono text-[var(--color-accent)]">
+              Kiválasztva: {selected.label}
+            </p>
           </div>
         )}
         {!value && (
-          <p className="text-xs text-[var(--color-text-muted)] mt-2">Próbáld: "akció", "riport", "TikTok"</p>
+          <p className="text-xs text-[var(--color-text-muted)] mt-2">
+            Próbáld: "akció", "riport", "TikTok"
+          </p>
         )}
       </div>
     )
@@ -137,7 +192,9 @@ export const EmptyState: Story = {
           placeholder="Próbálj valami exotikusat..."
         />
         {!value && (
-          <p className="text-xs text-[var(--color-text-muted)] mt-2">Gépelj valamit — üres találatlista jelenik meg</p>
+          <p className="text-xs text-[var(--color-text-muted)] mt-2">
+            Gépelj valamit — üres találatlista jelenik meg
+          </p>
         )}
       </div>
     )
@@ -152,9 +209,8 @@ export const GlobalSearch: Story = {
     const results = useMemo(() => {
       if (!value.trim()) return []
       const q = value.toLowerCase()
-      return ALL_RESULTS.filter(r =>
-        r.label.toLowerCase().includes(q) ||
-        r.description?.toLowerCase().includes(q)
+      return ALL_RESULTS.filter(
+        (r) => r.label.toLowerCase().includes(q) || r.description?.toLowerCase().includes(q),
       )
     }, [value])
 
@@ -176,9 +232,11 @@ export const GlobalSearch: Story = {
         </div>
         {!value && (
           <div className="mt-4">
-            <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-2">Gyors elérés</p>
+            <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-2">
+              Gyors elérés
+            </p>
             <div className="flex flex-wrap gap-2">
-              {['Aktív kampányok', 'Legutóbbi riport', 'API beállítások'].map(s => (
+              {['Aktív kampányok', 'Legutóbbi riport', 'API beállítások'].map((s) => (
                 <button
                   key={s}
                   onClick={() => setValue(s)}

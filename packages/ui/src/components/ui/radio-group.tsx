@@ -2,39 +2,45 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import * as React from 'react'
 import { cn } from '../../lib/utils'
 
-const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <RadioGroupPrimitive.Root className={cn('grid gap-2', className)} {...props} ref={ref} />
-))
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
+function RadioGroup({
+  className,
+  ref,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & {
+  ref?: React.Ref<React.ComponentRef<typeof RadioGroupPrimitive.Root>>
+}) {
+  return <RadioGroupPrimitive.Root className={cn('grid gap-2', className)} {...props} ref={ref} />
+}
 
-const RadioGroupItem = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, ...props }, ref) => (
-  <RadioGroupPrimitive.Item
-    ref={ref}
-    className={cn(
-      'aspect-square h-5 w-5 rounded-full shrink-0 cursor-pointer',
-      'border-2 border-[var(--color-border-strong)]',
-      'bg-transparent',
-      'transition-colors duration-[var(--transition-fast)]',
-      'hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-muted)]',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2',
-      'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-[var(--color-border-strong)] disabled:hover:bg-transparent',
-      'data-[state=checked]:border-[var(--color-accent)]',
-      className,
-    )}
-    {...props}
-  >
-    <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-      <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] block" />
-    </RadioGroupPrimitive.Indicator>
-  </RadioGroupPrimitive.Item>
-))
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
+function RadioGroupItem({
+  className,
+  ref,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
+  ref?: React.Ref<React.ComponentRef<typeof RadioGroupPrimitive.Item>>
+}) {
+  return (
+    <RadioGroupPrimitive.Item
+      ref={ref}
+      className={cn(
+        'aspect-square h-5 w-5 rounded-full shrink-0 cursor-pointer',
+        'border-2 border-[var(--color-border-strong)]',
+        'bg-transparent',
+        'transition-colors duration-[var(--transition-fast)]',
+        'hover:border-[var(--color-accent)] hover:bg-[var(--color-accent-muted)]',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2',
+        'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-[var(--color-border-strong)] disabled:hover:bg-transparent',
+        'data-[state=checked]:border-[var(--color-accent)]',
+        className,
+      )}
+      {...props}
+    >
+      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+        <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] block" />
+      </RadioGroupPrimitive.Indicator>
+    </RadioGroupPrimitive.Item>
+  )
+}
 
 // ── RadioButton — convenience wrapper with label + description ───────────────
 
@@ -44,10 +50,14 @@ export interface RadioButtonProps
   description?: string
 }
 
-const RadioButton = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  RadioButtonProps
->(({ label, description, className, id, ...props }, ref) => {
+function RadioButton({
+  label,
+  description,
+  className,
+  id,
+  ref,
+  ...props
+}: RadioButtonProps & { ref?: React.Ref<React.ComponentRef<typeof RadioGroupPrimitive.Item>> }) {
   const generatedId = React.useId()
   const itemId = id ?? generatedId
   return (
@@ -67,7 +77,6 @@ const RadioButton = React.forwardRef<
       )}
     </label>
   )
-})
-RadioButton.displayName = 'RadioButton'
+}
 
 export { RadioGroup, RadioGroupItem, RadioButton }

@@ -23,7 +23,10 @@ export const Default: Story = {
           onOpenChange={setOpen}
           title="Biztosan folytatod?"
           description="Ez a művelet visszafordíthatatlan. Az adatok véglegesen elvesznek."
-          onConfirm={() => { alert('Megerősítve!'); setOpen(false) }}
+          onConfirm={() => {
+            alert('Megerősítve!')
+            setOpen(false)
+          }}
         />
       </div>
     )
@@ -47,11 +50,16 @@ export const Destructive: Story = {
           open={open}
           onOpenChange={setOpen}
           title="Kampány törlése"
-          description={'A „Nyári akció 2025" kampány véglegesen törlésre kerül. A hirdetési adatok nem állíthatók vissza.'}
+          description={
+            'A „Nyári akció 2025" kampány véglegesen törlésre kerül. A hirdetési adatok nem állíthatók vissza.'
+          }
           confirmLabel="Igen, törlöm"
           cancelLabel="Mégsem"
           variant="destructive"
-          onConfirm={() => { alert('Törölve!'); setOpen(false) }}
+          onConfirm={() => {
+            alert('Törölve!')
+            setOpen(false)
+          }}
         />
       </div>
     )
@@ -75,7 +83,10 @@ export const Loading: Story = {
           loading={loading}
           onConfirm={() => {
             setLoading(true)
-            setTimeout(() => { setLoading(false); setOpen(false) }, 2000)
+            setTimeout(() => {
+              setLoading(false)
+              setOpen(false)
+            }, 2000)
           }}
         />
       </div>

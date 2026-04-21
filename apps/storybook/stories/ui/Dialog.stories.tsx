@@ -2,9 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { Lock, Trash2, AlertTriangle, CheckCircle2 } from 'lucide-react'
 import {
-  Dialog, DialogTrigger, DialogContent, DialogHeader,
-  DialogTitle, DialogDescription, DialogFooter,
-  Button, Input,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  Button,
+  Input,
 } from '@vikingo/ui'
 
 const meta: Meta = {
@@ -13,7 +19,13 @@ const meta: Meta = {
     layout: 'centered',
     docs: { source: { type: 'code' } },
   },
-  decorators: [(Story) => <div className="p-8 bg-[var(--color-bg)]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="p-8 bg-[var(--color-bg)]">
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
 }
 export default meta
@@ -35,20 +47,15 @@ export const LoginDialog: Story = {
               <Lock className="h-5 w-5 text-[var(--color-accent)]" />
               <DialogTitle>Belépés</DialogTitle>
             </div>
-            <DialogDescription>
-              Add meg a jelszót a hozzáféréshez
-            </DialogDescription>
+            <DialogDescription>Add meg a jelszót a hozzáféréshez</DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-4">
-            <Input
-              label="Jelszó"
-              type="password"
-              placeholder="••••••••"
-              autoFocus
-            />
+            <Input label="Jelszó" type="password" placeholder="••••••••" autoFocus />
           </div>
           <DialogFooter>
-            <Button variant="ghost" onClick={() => setOpen(false)}>Mégse</Button>
+            <Button variant="ghost" onClick={() => setOpen(false)}>
+              Mégse
+            </Button>
             <Button onClick={() => setOpen(false)}>Belépés</Button>
           </DialogFooter>
         </DialogContent>
@@ -79,8 +86,12 @@ export const DeleteConfirmation: Story = {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="ghost" onClick={() => setOpen(false)}>Mégse</Button>
-            <Button variant="destructive" onClick={() => setOpen(false)}>Törlés</Button>
+            <Button variant="ghost" onClick={() => setOpen(false)}>
+              Mégse
+            </Button>
+            <Button variant="destructive" onClick={() => setOpen(false)}>
+              Törlés
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -128,9 +139,7 @@ export const FormDialog: Story = {
         <DialogContent size="md">
           <DialogHeader>
             <DialogTitle>Új kampány</DialogTitle>
-            <DialogDescription>
-              Töltsd ki az adatokat az új kampány indításához.
-            </DialogDescription>
+            <DialogDescription>Töltsd ki az adatokat az új kampány indításához.</DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-4">
             <Input label="Kampány neve" placeholder="pl. Nyári akció 2025" />
@@ -141,7 +150,9 @@ export const FormDialog: Story = {
             <Input label="Büdzsé" placeholder="0" hint="Euróban add meg az összeget" />
           </div>
           <DialogFooter>
-            <Button variant="ghost" onClick={() => setOpen(false)}>Mégse</Button>
+            <Button variant="ghost" onClick={() => setOpen(false)}>
+              Mégse
+            </Button>
             <Button onClick={() => setOpen(false)}>Kampány létrehozása</Button>
           </DialogFooter>
         </DialogContent>

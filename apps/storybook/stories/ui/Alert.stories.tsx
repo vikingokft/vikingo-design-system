@@ -43,22 +43,37 @@ export const Closeable: Story = {
           </p>
         )}
         {alerts.includes('info') && (
-          <Alert variant="info" title="Új funkció elérhető" onClose={() => setAlerts(a => a.filter(x => x !== 'info'))}>
+          <Alert
+            variant="info"
+            title="Új funkció elérhető"
+            onClose={() => setAlerts((a) => a.filter((x) => x !== 'info'))}
+          >
             A Google Analytics 4 integráció mostantól elérhető a beállításokban.
           </Alert>
         )}
         {alerts.includes('success') && (
-          <Alert variant="success" title="Import befejezve" onClose={() => setAlerts(a => a.filter(x => x !== 'success'))}>
+          <Alert
+            variant="success"
+            title="Import befejezve"
+            onClose={() => setAlerts((a) => a.filter((x) => x !== 'success'))}
+          >
             348 hirdetés sikeresen importálva a Facebook könyvtárból.
           </Alert>
         )}
         {alerts.includes('warning') && (
-          <Alert variant="warning" onClose={() => setAlerts(a => a.filter(x => x !== 'warning'))}>
+          <Alert
+            variant="warning"
+            onClose={() => setAlerts((a) => a.filter((x) => x !== 'warning'))}
+          >
             A TikTok hozzáférési token 3 nap múlva lejár. Újítsd meg időben.
           </Alert>
         )}
         {alerts.includes('error') && (
-          <Alert variant="error" title="Szinkronizálás sikertelen" onClose={() => setAlerts(a => a.filter(x => x !== 'error'))}>
+          <Alert
+            variant="error"
+            title="Szinkronizálás sikertelen"
+            onClose={() => setAlerts((a) => a.filter((x) => x !== 'error'))}
+          >
             A Meta API visszautasította a kérést (kód: 190). Ellenőrizd a jogosultságokat.
           </Alert>
         )}

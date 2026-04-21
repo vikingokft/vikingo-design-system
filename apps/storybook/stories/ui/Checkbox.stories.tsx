@@ -47,8 +47,8 @@ export const TableHeader: Story = {
     }
 
     function toggleRow(name: string) {
-      setSelected(prev =>
-        prev.includes(name) ? prev.filter(r => r !== name) : [...prev, name]
+      setSelected((prev) =>
+        prev.includes(name) ? prev.filter((r) => r !== name) : [...prev, name],
       )
     }
 
@@ -65,12 +65,12 @@ export const TableHeader: Story = {
               Kampány neve
             </span>
           </div>
-          {rows.map(row => (
-            <label key={row} className="flex items-center gap-3 px-4 py-3 border-b last:border-0 border-[var(--color-border)] cursor-pointer hover:bg-[var(--color-bg)]/50 transition-colors">
-              <Checkbox
-                checked={selected.includes(row)}
-                onCheckedChange={() => toggleRow(row)}
-              />
+          {rows.map((row) => (
+            <label
+              key={row}
+              className="flex items-center gap-3 px-4 py-3 border-b last:border-0 border-[var(--color-border)] cursor-pointer hover:bg-[var(--color-bg)]/50 transition-colors"
+            >
+              <Checkbox checked={selected.includes(row)} onCheckedChange={() => toggleRow(row)} />
               <span className="text-sm text-[var(--color-text)]">{row}</span>
             </label>
           ))}

@@ -172,7 +172,11 @@ Available CSS custom properties:
 - Colors: `--color-text`, `--color-text-muted`, `--color-bg`, `--color-surface`, `--color-border`, `--color-accent`, `--color-accent-hover`, `--color-accent-muted`
 - Status: `--color-success`, `--color-warning`, `--color-error`, `--color-info`
 - Radius: `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`, `--radius-full`
-- Shadow: `--shadow-sm`, `--shadow-md`, `--shadow-lg`
+- Shadow: `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-xl`
+- Duration: `--duration-fast` (120ms), `--duration-base` (200ms), `--duration-slow` (320ms)
+- Easing: `--ease-out-quint` (default), `--ease-in-out`, `--ease-soft`
+
+Motion respects `prefers-reduced-motion: reduce` globally — animations collapse when the OS setting is on.
 
 ---
 

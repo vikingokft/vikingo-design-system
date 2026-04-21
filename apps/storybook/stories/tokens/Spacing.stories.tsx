@@ -6,6 +6,7 @@ const meta: Meta = {
     layout: 'fullscreen',
     docs: { source: { type: 'code' } },
   },
+  tags: ['autodocs'],
 }
 export default meta
 type Story = StoryObj
@@ -47,16 +48,20 @@ export const SpacingAndRadius: Story = {
       </p>
 
       <section className="mb-10">
-        <h2 className="font-display font-semibold text-base text-[var(--color-text)] mb-4">Spacing</h2>
+        <h2 className="font-display font-semibold text-base text-[var(--color-text)] mb-4">
+          Spacing
+        </h2>
         <div className="flex flex-col gap-3">
-          {spacingTokens.map(t => (
+          {spacingTokens.map((t) => (
             <div key={t.name} className="flex items-center gap-4">
               <div
                 className="bg-[var(--color-accent)] rounded-[var(--radius-sm)] shrink-0"
                 style={{ width: t.value, height: '24px' }}
               />
               <div className="flex items-baseline gap-3">
-                <span className="text-sm font-mono font-medium text-[var(--color-text)] w-10">{t.label}</span>
+                <span className="text-sm font-mono font-medium text-[var(--color-text)] w-10">
+                  {t.label}
+                </span>
                 <span className="text-xs font-mono text-[var(--color-text-muted)]">{t.name}</span>
                 <span className="text-xs font-mono text-[var(--color-text-subtle)]">{t.value}</span>
               </div>
@@ -66,25 +71,31 @@ export const SpacingAndRadius: Story = {
       </section>
 
       <section className="mb-10">
-        <h2 className="font-display font-semibold text-base text-[var(--color-text)] mb-4">Border Radius</h2>
+        <h2 className="font-display font-semibold text-base text-[var(--color-text)] mb-4">
+          Border Radius
+        </h2>
         <div className="flex flex-wrap gap-4">
-          {radiusTokens.map(t => (
+          {radiusTokens.map((t) => (
             <div key={t.name} className="flex flex-col items-center gap-2">
               <div
                 className="w-16 h-16 bg-[var(--color-accent-muted)] border-2 border-[var(--color-accent)]/40"
                 style={{ borderRadius: t.value }}
               />
               <span className="text-xs font-mono text-[var(--color-text-muted)]">{t.label}</span>
-              <span className="text-[10px] font-mono text-[var(--color-text-subtle)]">{t.value}</span>
+              <span className="text-[10px] font-mono text-[var(--color-text-subtle)]">
+                {t.value}
+              </span>
             </div>
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="font-display font-semibold text-base text-[var(--color-text)] mb-4">Shadows</h2>
+        <h2 className="font-display font-semibold text-base text-[var(--color-text)] mb-4">
+          Shadows
+        </h2>
         <div className="flex flex-wrap gap-6">
-          {shadowTokens.map(t => (
+          {shadowTokens.map((t) => (
             <div key={t.name} className="flex flex-col items-center gap-3">
               <div
                 className="w-24 h-16 bg-[var(--color-surface)] rounded-[var(--radius-lg)]"
@@ -115,28 +126,32 @@ export const Transitions: Story = {
 
       <div className="flex gap-6">
         {[
-          { name: '--transition-fast', value: '150ms', label: 'fast', use: 'Hover, focus states' },
-          { name: '--transition-base', value: '200ms', label: 'base', use: 'General interactions' },
-          { name: '--transition-slow', value: '300ms', label: 'slow', use: 'Progress, skeleton' },
-        ].map(t => (
+          { name: '--duration-fast', value: '120ms', label: 'fast', use: 'Hover, focus states' },
+          { name: '--duration-base', value: '200ms', label: 'base', use: 'General interactions' },
+          { name: '--duration-slow', value: '320ms', label: 'slow', use: 'Progress, skeleton' },
+        ].map((t) => (
           <div
             key={t.name}
             className="group w-32 h-20 rounded-[var(--radius-lg)] bg-[var(--color-surface)] border border-[var(--color-border)] flex flex-col items-center justify-center cursor-pointer"
             style={{
               transition: `transform var(${t.name}), box-shadow var(${t.name})`,
             }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)'
+            onMouseEnter={(e) => {
+              ;(e.currentTarget as HTMLElement).style.transform = 'scale(1.05)'
               ;(e.currentTarget as HTMLElement).style.boxShadow = 'var(--shadow-md)'
             }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLElement).style.transform = 'scale(1)'
+            onMouseLeave={(e) => {
+              ;(e.currentTarget as HTMLElement).style.transform = 'scale(1)'
               ;(e.currentTarget as HTMLElement).style.boxShadow = 'none'
             }}
           >
-            <span className="text-sm font-mono font-medium text-[var(--color-text)]">{t.label}</span>
+            <span className="text-sm font-mono font-medium text-[var(--color-text)]">
+              {t.label}
+            </span>
             <span className="text-xs font-mono text-[var(--color-accent)]">{t.value}</span>
-            <span className="text-[10px] text-[var(--color-text-subtle)] mt-1 text-center px-2">{t.use}</span>
+            <span className="text-[10px] text-[var(--color-text-subtle)] mt-1 text-center px-2">
+              {t.use}
+            </span>
           </div>
         ))}
       </div>

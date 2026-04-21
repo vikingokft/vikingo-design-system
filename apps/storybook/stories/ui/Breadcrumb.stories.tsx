@@ -1,8 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Slash } from 'lucide-react'
 import {
-  Breadcrumb, BreadcrumbList, BreadcrumbItem,
-  BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis,
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
 } from '@vikingo/ui'
 
 const meta: Meta = {

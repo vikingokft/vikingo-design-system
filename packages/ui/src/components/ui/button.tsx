@@ -100,41 +100,36 @@ export interface ButtonProps
  * <Button variant="destructive" isLoading>Törlés folyamatban…</Button>
  * <Button asChild><Link href="/settings">Beállítások</Link></Button>
  */
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant,
-      size,
-      asChild = false,
-      loading,
-      leftIcon,
-      rightIcon,
-      children,
-      disabled,
-      ...props
-    },
-    ref,
-  ) => {
-    const Comp = asChild ? Slot : 'button'
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        disabled={disabled || loading}
-        {...props}
-      >
-        {loading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : leftIcon ? (
-          <span className="flex items-center">{leftIcon}</span>
-        ) : null}
-        {children}
-        {!loading && rightIcon && <span className="flex items-center">{rightIcon}</span>}
-      </Comp>
-    )
-  },
-)
-Button.displayName = 'Button'
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  loading,
+  leftIcon,
+  rightIcon,
+  children,
+  disabled,
+  ref,
+  ...props
+}: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
+  const Comp = asChild ? Slot : 'button'
+  return (
+    <Comp
+      className={cn(buttonVariants({ variant, size, className }))}
+      ref={ref}
+      disabled={disabled || loading}
+      {...props}
+    >
+      {loading ? (
+        <Loader2 className="h-4 w-4 animate-spin" />
+      ) : leftIcon ? (
+        <span className="flex items-center">{leftIcon}</span>
+      ) : null}
+      {children}
+      {!loading && rightIcon && <span className="flex items-center">{rightIcon}</span>}
+    </Comp>
+  )
+}
 
 export { Button, buttonVariants }

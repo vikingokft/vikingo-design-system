@@ -98,10 +98,20 @@
     --shadow-lg:             0 8px 24px rgba(62, 46, 69, 0.12);
     --shadow-xl:             0 16px 40px rgba(62, 46, 69, 0.16);
 
-    /* ===== TRANSITIONS ===== */
-    --transition-fast:       150ms ease;
-    --transition-base:       200ms ease;
-    --transition-slow:       300ms ease;
+    /* ===== MOTION ===== */
+    /* Named easing curves — reference these in components instead of anonymous `ease` */
+    --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);    /* default deceleration */
+    --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);    /* reversible transitions */
+    --ease-soft:      cubic-bezier(0.34, 1.25, 0.64, 1); /* gentle — no bounce */
+
+    --duration-fast:  120ms;
+    --duration-base:  200ms;
+    --duration-slow:  320ms;
+
+    /* Back-compat aliases (pre-v0.5 shorthand) */
+    --transition-fast: var(--duration-fast) var(--ease-out-quint);
+    --transition-base: var(--duration-base) var(--ease-out-quint);
+    --transition-slow: var(--duration-slow) var(--ease-out-quint);
 
     /* ===== TOPBAR ===== */
     --topbar-height:         60px;
@@ -209,7 +219,8 @@
 /* Registered as @utility so data-state variants (data-[state=open]:animate-in etc.) work in Tailwind v4 */
 @utility animate-in {
   animation-name: enter;
-  animation-duration: 150ms;
+  animation-duration: var(--duration-fast);
+  animation-timing-function: var(--ease-out-quint);
   animation-fill-mode: both;
   --tw-enter-opacity: initial;
   --tw-enter-scale: initial;
@@ -219,7 +230,8 @@
 }
 @utility animate-out {
   animation-name: exit;
-  animation-duration: 150ms;
+  animation-duration: var(--duration-fast);
+  animation-timing-function: var(--ease-out-quint);
   animation-fill-mode: both;
   --tw-exit-opacity: initial;
   --tw-exit-scale: initial;
@@ -262,10 +274,10 @@
   to { height: 0; opacity: 0; }
 }
 .animate-accordion-down {
-  animation: accordion-down 200ms ease;
+  animation: accordion-down var(--duration-base) var(--ease-out-quint);
 }
 .animate-accordion-up {
-  animation: accordion-up 200ms ease;
+  animation: accordion-up var(--duration-base) var(--ease-out-quint);
 }
 
 /* ===== GLOBAL BASE STYLES ===== */
@@ -334,5 +346,28 @@
   ::selection {
     background: var(--color-accent-muted);
     color: var(--color-text);
+  }
+
+  /* ===== REDUCED MOTION =====
+   * Honors the OS-level `prefers-reduced-motion: reduce` setting.
+   * The `.force-reduce-motion` class lets Storybook (or consumers) opt into the
+   * same behavior without changing OS settings — useful for preview toggles.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  .force-reduce-motion,
+  .force-reduce-motion *,
+  .force-reduce-motion *::before,
+  .force-reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

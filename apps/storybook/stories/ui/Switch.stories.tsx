@@ -45,7 +45,7 @@ export const SettingsList: Story = {
     })
 
     const toggle = (key: keyof typeof settings) =>
-      setSettings(prev => ({ ...prev, [key]: !prev[key] }))
+      setSettings((prev) => ({ ...prev, [key]: !prev[key] }))
 
     const items = [
       { key: 'email' as const, label: 'E-mail értesítések', desc: 'Kampány teljesítményről' },
@@ -63,16 +63,15 @@ export const SettingsList: Story = {
               className={[
                 'flex items-center justify-between px-4 py-3',
                 i < items.length - 1 && 'border-b border-[var(--color-border)]',
-              ].filter(Boolean).join(' ')}
+              ]
+                .filter(Boolean)
+                .join(' ')}
             >
               <div>
                 <p className="text-sm font-medium text-[var(--color-text)]">{item.label}</p>
                 <p className="text-xs text-[var(--color-text-muted)]">{item.desc}</p>
               </div>
-              <Switch
-                checked={settings[item.key]}
-                onCheckedChange={() => toggle(item.key)}
-              />
+              <Switch checked={settings[item.key]} onCheckedChange={() => toggle(item.key)} />
             </div>
           ))}
         </div>

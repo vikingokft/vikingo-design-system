@@ -71,7 +71,7 @@ export const PasswordToggle: Story = {
         rightIcon={
           <button
             type="button"
-            onClick={() => setShow(v => !v)}
+            onClick={() => setShow((v) => !v)}
             className="pointer-events-auto text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
           >
             {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

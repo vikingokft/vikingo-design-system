@@ -5,13 +5,18 @@ import { cn } from '../../lib/utils'
 
 const Tabs = TabsPrimitive.Root
 
-const TabsList = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> & {
-    variant?: 'default' | 'pills' | 'underline'
-  }
->(({ className, variant = 'default', ...props }, ref) => {
-  const innerRef = React.useRef<HTMLElement>(null)
+type TabsListElement = React.ComponentRef<typeof TabsPrimitive.List>
+
+function TabsList({
+  className,
+  variant = 'default',
+  ref,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> & {
+  variant?: 'default' | 'pills' | 'underline'
+  ref?: React.Ref<TabsListElement>
+}) {
+  const innerRef = React.useRef<TabsListElement | null>(null)
   const [showLeft, setShowLeft] = React.useState(false)
   const [showRight, setShowRight] = React.useState(false)
 
@@ -36,10 +41,10 @@ const TabsList = React.forwardRef<
   }, [updateArrows])
 
   const mergedRef = React.useCallback(
-    (node: React.ElementRef<typeof TabsPrimitive.List> | null) => {
-      ;(innerRef as React.MutableRefObject<typeof node>).current = node
+    (node: TabsListElement | null) => {
+      innerRef.current = node
       if (typeof ref === 'function') ref(node)
-      else if (ref) ref.current = node
+      else if (ref) (ref as React.RefObject<TabsListElement | null>).current = node
     },
     [ref],
   )
@@ -93,50 +98,55 @@ const TabsList = React.forwardRef<
       )}
     </div>
   )
-})
-TabsList.displayName = TabsPrimitive.List.displayName
+}
 
-const TabsTrigger = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.Trigger
-    ref={ref}
-    className={cn(
-      'inline-flex items-center justify-center gap-1.5',
-      'px-3 py-1.5 text-sm font-medium font-body',
-      'whitespace-nowrap cursor-pointer',
-      'transition-all duration-[var(--transition-fast)]',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
-      'disabled:pointer-events-none disabled:opacity-50',
-      // Default variant styles (applied when inside default TabsList)
-      '[&[data-state=active]]:bg-[var(--color-surface)] [&[data-state=active]]:text-[var(--color-text)]',
-      '[&[data-state=active]]:shadow-[var(--shadow-sm)] [&[data-state=active]]:rounded-[var(--radius-sm)]',
-      'text-[var(--color-text-muted)] hover:text-[var(--color-text)]',
-      // Underline variant override via parent selector
-      '[.tabs-underline_&]:rounded-none [.tabs-underline_&]:border-b-2 [.tabs-underline_&]:border-transparent',
-      '[.tabs-underline_&[data-state=active]]:border-[var(--color-accent)] [.tabs-underline_&[data-state=active]]:text-[var(--color-accent)]',
-      '[.tabs-underline_&[data-state=active]]:bg-transparent [.tabs-underline_&[data-state=active]]:shadow-none',
-      className,
-    )}
-    {...props}
-  />
-))
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
+function TabsTrigger({
+  className,
+  ref,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> & {
+  ref?: React.Ref<React.ComponentRef<typeof TabsPrimitive.Trigger>>
+}) {
+  return (
+    <TabsPrimitive.Trigger
+      ref={ref}
+      className={cn(
+        'inline-flex items-center justify-center gap-1.5',
+        'px-3 py-1.5 text-sm font-medium font-body',
+        'whitespace-nowrap cursor-pointer',
+        'transition-all duration-[var(--transition-fast)]',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
+        'disabled:pointer-events-none disabled:opacity-50',
+        '[&[data-state=active]]:bg-[var(--color-surface)] [&[data-state=active]]:text-[var(--color-text)]',
+        '[&[data-state=active]]:shadow-[var(--shadow-sm)] [&[data-state=active]]:rounded-[var(--radius-sm)]',
+        'text-[var(--color-text-muted)] hover:text-[var(--color-text)]',
+        '[.tabs-underline_&]:rounded-none [.tabs-underline_&]:border-b-2 [.tabs-underline_&]:border-transparent',
+        '[.tabs-underline_&[data-state=active]]:border-[var(--color-accent)] [.tabs-underline_&[data-state=active]]:text-[var(--color-accent)]',
+        '[.tabs-underline_&[data-state=active]]:bg-transparent [.tabs-underline_&[data-state=active]]:shadow-none',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
 
-const TabsContent = React.forwardRef<
-  React.ElementRef<typeof TabsPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.Content
-    ref={ref}
-    className={cn(
-      'mt-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
-      className,
-    )}
-    {...props}
-  />
-))
-TabsContent.displayName = TabsPrimitive.Content.displayName
+function TabsContent({
+  className,
+  ref,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content> & {
+  ref?: React.Ref<React.ComponentRef<typeof TabsPrimitive.Content>>
+}) {
+  return (
+    <TabsPrimitive.Content
+      ref={ref}
+      className={cn(
+        'mt-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
 
 export { Tabs, TabsList, TabsTrigger, TabsContent }

@@ -1,8 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import {
-  Select, SelectTrigger, SelectValue, SelectContent,
-  SelectItem, SelectGroup, SelectLabel, SelectSeparator,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel,
+  SelectSeparator,
 } from '@vikingo/ui'
 
 const meta: Meta = {

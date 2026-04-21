@@ -14,12 +14,16 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-8 p-6 bg-[var(--color-bg)] w-96">
       <div>
-        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonText</p>
+        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">
+          SkeletonText
+        </p>
         <SkeletonText lines={3} />
       </div>
       <div className="flex items-center gap-4">
         <div>
-          <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonCircle</p>
+          <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">
+            SkeletonCircle
+          </p>
           <div className="flex items-end gap-3">
             <SkeletonCircle size="sm" />
             <SkeletonCircle size="md" />
@@ -29,11 +33,15 @@ export const Variants: Story = {
         </div>
       </div>
       <div>
-        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonCard</p>
+        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">
+          SkeletonCard
+        </p>
         <SkeletonCard />
       </div>
       <div>
-        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">SkeletonButton</p>
+        <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)] mb-3">
+          SkeletonButton
+        </p>
         <div className="flex items-center gap-3">
           <SkeletonButton size="sm" />
           <SkeletonButton size="md" />
@@ -80,7 +88,10 @@ export const TableSkeleton: Story = {
           <Skeleton className="h-4 w-20" />
         </div>
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="flex items-center gap-4 px-4 py-3 border-b last:border-0 border-[var(--color-border)]">
+          <div
+            key={i}
+            className="flex items-center gap-4 px-4 py-3 border-b last:border-0 border-[var(--color-border)]"
+          >
             <Skeleton className="h-7 w-7 rounded-full shrink-0" />
             <div className="flex flex-col gap-1.5 flex-1">
               <Skeleton className="h-3.5 w-40" />
@@ -101,7 +112,10 @@ export const KPISkeleton: Story = {
   render: () => (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-[var(--color-bg)]">
       {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 flex flex-col gap-3">
+        <div
+          key={i}
+          className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4 flex flex-col gap-3"
+        >
           <Skeleton className="h-3 w-20" />
           <Skeleton className="h-7 w-28" />
           <Skeleton className="h-3 w-24" />

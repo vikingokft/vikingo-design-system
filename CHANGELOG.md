@@ -4,6 +4,30 @@ All notable changes to the Vikingo Design System.
 
 ---
 
+## [0.5.1] – 2026-04-21
+
+### Fix
+- **Tokens/Icons story restored** (`tokens-icons--icon-browser`) — the broken bookmark URL at `/?path=/story/tokens-icons--icon-browser` resolves again. Previous removal (`e72bbae`) eager-imported all ~1400 Lucide icons; the new story is curated to the ~54 icons actually used across `@vikingo/ui` with an inline usage guide and a link out to [lucide.dev/icons](https://lucide.dev/icons/) for anything else.
+
+### Motion Tokens (Claude Design alignment)
+- `globals.css`: Named easing curves — `--ease-out-quint` (default deceleration), `--ease-in-out` (reversible), `--ease-soft` (gentle overshoot, no bounce)
+- `globals.css`: Explicit duration tokens — `--duration-fast` (120ms), `--duration-base` (200ms), `--duration-slow` (320ms). Old `--transition-{fast,base,slow}` kept as back-compat aliases composing duration + easing — no consumer breakage.
+- `globals.css`: **`prefers-reduced-motion: reduce` respected globally** — animations collapse to ~0ms when the OS setting is on. Internal animation utilities (`animate-in`/`animate-out`, accordion keyframes, Switch thumb) now reference the duration/easing tokens instead of hard-coded values.
+- `apps/storybook/.storybook/preview.tsx`: Added a Motion toolbar toggle (`full` / `reduced`) so designers can preview the reduced-motion state without changing OS settings. Applies the `.force-reduce-motion` class from `@vikingo/ui/styles`.
+
+### React 19 Hygiene
+- Dropped `React.forwardRef` wrappers across all 28 components in `packages/ui/src/components/ui/` — React 19 natively treats `ref` as a regular prop, so forwardRef is dead weight for pure pass-through components. Types preserved via `React.ComponentPropsWithoutRef` + `React.ComponentRef`. No public API change; refs still attach identically.
+- Named function declarations auto-set `displayName`, so explicit `.displayName = '…'` assignments were removed.
+
+### Storybook
+- `apps/storybook/stories/tokens/Spacing.stories.tsx`: Added missing `tags: ['autodocs']`. Updated the Transitions preview to display the new `--duration-*` tokens and accurate millisecond values.
+
+### Docs
+- `CONSUMER_CLAUDE.md`, `docs/presets/{nextjs,chrome-extension,marketing-site}.md`: Added motion tokens to the available CSS custom properties list.
+- `CONTRIBUTING.md`: Updated component template to the React 19 ref-as-prop pattern; added duration/easing rows to the CSS custom properties table; dropped the outdated "always `forwardRef`/`displayName`" rule.
+
+---
+
 ## [0.4.0] – 2026-03-06
 
 ### New Components

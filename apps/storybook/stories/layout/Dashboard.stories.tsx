@@ -1,16 +1,37 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import {
-  LayoutDashboard, CreditCard, Megaphone, Music2,
-  Settings, HelpCircle, Bell, Users,
+  LayoutDashboard,
+  CreditCard,
+  Megaphone,
+  Music2,
+  Settings,
+  HelpCircle,
+  Bell,
+  Users,
 } from 'lucide-react'
 import {
-  Sidebar, Topbar, PageLayout, PageContent,
-  StatCard, ChartCard, MetricRow, PageHeader, PeriodFilter,
-  AreaChart, MultiBarChart,
-  Badge, Button, Avatar, AvatarFallback, Logo,
-  Card, CardContent,
-  formatFt, formatSzam, formatSzazalek,
+  Sidebar,
+  Topbar,
+  PageLayout,
+  PageContent,
+  StatCard,
+  ChartCard,
+  MetricRow,
+  PageHeader,
+  PeriodFilter,
+  AreaChart,
+  MultiBarChart,
+  Badge,
+  Button,
+  Avatar,
+  AvatarFallback,
+  Logo,
+  Card,
+  CardContent,
+  formatFt,
+  formatSzam,
+  formatSzazalek,
 } from '@vikingo/ui'
 
 const hu = formatSzam
@@ -41,9 +62,14 @@ const elofizetokData = elofizetokDates.map((x, i) => ({
 const adDates = generateDates(30)
 const adSpendData = adDates.map((x, i) => ({
   x,
-  facebook: Math.max(0, Math.round(
-    80_000 + (i >= 10 && i <= 20 ? (i - 10) * 16_000 : i > 20 ? (30 - i) * 11_000 : 0) + (i % 3) * 15_000
-  )),
+  facebook: Math.max(
+    0,
+    Math.round(
+      80_000 +
+        (i >= 10 && i <= 20 ? (i - 10) * 16_000 : i > 20 ? (30 - i) * 11_000 : 0) +
+        (i % 3) * 15_000,
+    ),
+  ),
   tiktok: Math.max(0, Math.round(3_000 + (i % 5) * 2_000)),
 }))
 
@@ -51,7 +77,12 @@ const navSections = [
   {
     label: 'Navigáció',
     items: [
-      { label: 'Összesítő', href: '#', icon: <LayoutDashboard className="h-4 w-4" />, active: true },
+      {
+        label: 'Összesítő',
+        href: '#',
+        icon: <LayoutDashboard className="h-4 w-4" />,
+        active: true,
+      },
       { label: 'Előfizetések', href: '#', icon: <CreditCard className="h-4 w-4" /> },
       { label: 'Facebook Ads', href: '#', icon: <Megaphone className="h-4 w-4" />, badge: 3 },
       { label: 'TikTok Ads', href: '#', icon: <Music2 className="h-4 w-4" /> },
@@ -76,7 +107,6 @@ const periodOptions = [
   { label: 'Teljes időszak', value: 'all' },
 ]
 
-
 function AnalyticsDashboard() {
   const [collapsed, setCollapsed] = useState(false)
   const [period, setPeriod] = useState('30d')
@@ -97,8 +127,12 @@ function AnalyticsDashboard() {
                   <AvatarFallback>NB</AvatarFallback>
                 </Avatar>
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-[var(--sidebar-text)] truncate">Nagy Bence</p>
-                  <p className="text-[10px] font-mono text-[var(--sidebar-text-muted)] truncate">admin</p>
+                  <p className="text-xs font-medium text-[var(--sidebar-text)] truncate">
+                    Nagy Bence
+                  </p>
+                  <p className="text-[10px] font-mono text-[var(--sidebar-text-muted)] truncate">
+                    admin
+                  </p>
                 </div>
               </div>
             ) : (
@@ -130,11 +164,7 @@ function AnalyticsDashboard() {
           title="Összesítő"
           description="Összes forrás · 30 nap"
           periodFilter={
-            <PeriodFilter
-              options={periodOptions}
-              value={period}
-              onChange={setPeriod}
-            />
+            <PeriodFilter options={periodOptions} value={period} onChange={setPeriod} />
           }
           lastUpdated="12:36:14"
         />

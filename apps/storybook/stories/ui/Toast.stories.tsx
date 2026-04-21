@@ -23,37 +23,49 @@ export const Types: Story = {
     <div className="flex flex-wrap gap-3 p-4 bg-[var(--color-bg)]">
       <Button
         variant="secondary"
-        onClick={() => toast('Kampány elmentve', { description: 'Változtatásaid sikeresen mentésre kerültek.' })}
+        onClick={() =>
+          toast('Kampány elmentve', { description: 'Változtatásaid sikeresen mentésre kerültek.' })
+        }
       >
         Alap
       </Button>
       <Button
         variant="secondary"
-        onClick={() => toast.success('Sikeresen közzétéve!', { description: 'A kampány most már él.' })}
+        onClick={() =>
+          toast.success('Sikeresen közzétéve!', { description: 'A kampány most már él.' })
+        }
       >
         Siker
       </Button>
       <Button
         variant="secondary"
-        onClick={() => toast.error('Hiba történt', { description: 'Nem sikerült csatlakozni az API-hoz.' })}
+        onClick={() =>
+          toast.error('Hiba történt', { description: 'Nem sikerült csatlakozni az API-hoz.' })
+        }
       >
         Hiba
       </Button>
       <Button
         variant="secondary"
-        onClick={() => toast.warning('Figyelmeztetés', { description: 'A büdzsé 90%-a felhasználásra került.' })}
+        onClick={() =>
+          toast.warning('Figyelmeztetés', { description: 'A büdzsé 90%-a felhasználásra került.' })
+        }
       >
         Figyelmeztetés
       </Button>
       <Button
         variant="secondary"
-        onClick={() => toast.info('Tájékoztatás', { description: 'Az adatok naponta egyszer frissülnek.' })}
+        onClick={() =>
+          toast.info('Tájékoztatás', { description: 'Az adatok naponta egyszer frissülnek.' })
+        }
       >
         Info
       </Button>
       <Button
         variant="secondary"
-        onClick={() => toast.loading('Szinkronizálás...', { description: 'Meta API kapcsolódás folyamatban.' })}
+        onClick={() =>
+          toast.loading('Szinkronizálás...', { description: 'Meta API kapcsolódás folyamatban.' })
+        }
       >
         Betöltés
       </Button>

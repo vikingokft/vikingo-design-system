@@ -52,60 +52,66 @@ const iconSizes = {
  *   onChange={setView}
  * />
  */
-export const SegmentedControl = React.forwardRef<HTMLDivElement, SegmentedControlProps>(
-  ({ options, value, defaultValue, onChange, size = 'md', disabled = false, className }, ref) => {
-    const isControlled = value !== undefined
-    const [internalValue, setInternalValue] = React.useState<string>(
-      defaultValue ?? options[0]?.value ?? '',
-    )
-    const current = isControlled ? value : internalValue
+export function SegmentedControl({
+  options,
+  value,
+  defaultValue,
+  onChange,
+  size = 'md',
+  disabled = false,
+  className,
+  ref,
+}: SegmentedControlProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const isControlled = value !== undefined
+  const [internalValue, setInternalValue] = React.useState<string>(
+    defaultValue ?? options[0]?.value ?? '',
+  )
+  const current = isControlled ? value : internalValue
 
-    function select(val: string) {
-      if (!isControlled) setInternalValue(val)
-      onChange?.(val)
-    }
+  function select(val: string) {
+    if (!isControlled) setInternalValue(val)
+    onChange?.(val)
+  }
 
-    return (
-      <div
-        ref={ref}
-        role="group"
-        className={cn(
-          'inline-flex items-center p-1 gap-1',
-          'rounded-[var(--radius-md)] border border-[var(--color-border)]',
-          'bg-[var(--color-bg)]',
-          disabled && 'opacity-50 pointer-events-none',
-          className,
-        )}
-      >
-        {options.map((opt) => {
-          const isActive = current === opt.value
-          return (
-            <button
-              key={opt.value}
-              type="button"
-              role="radio"
-              aria-checked={isActive}
-              disabled={disabled || opt.disabled}
-              onClick={() => select(opt.value)}
-              className={cn(
-                'inline-flex items-center justify-center font-medium font-body',
-                'rounded-[var(--radius-sm)] whitespace-nowrap',
-                'transition-all duration-[var(--transition-fast)]',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
-                'disabled:pointer-events-none disabled:opacity-40',
-                sizeClasses[size],
-                isActive
-                  ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow-[var(--shadow-sm)]'
-                  : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface)]/50',
-              )}
-            >
-              {opt.icon && <span className={cn('shrink-0', iconSizes[size])}>{opt.icon}</span>}
-              {opt.label && <span>{opt.label}</span>}
-            </button>
-          )
-        })}
-      </div>
-    )
-  },
-)
-SegmentedControl.displayName = 'SegmentedControl'
+  return (
+    <div
+      ref={ref}
+      role="group"
+      className={cn(
+        'inline-flex items-center p-1 gap-1',
+        'rounded-[var(--radius-md)] border border-[var(--color-border)]',
+        'bg-[var(--color-bg)]',
+        disabled && 'opacity-50 pointer-events-none',
+        className,
+      )}
+    >
+      {options.map((opt) => {
+        const isActive = current === opt.value
+        return (
+          <button
+            key={opt.value}
+            type="button"
+            role="radio"
+            aria-checked={isActive}
+            disabled={disabled || opt.disabled}
+            onClick={() => select(opt.value)}
+            className={cn(
+              'inline-flex items-center justify-center font-medium font-body',
+              'rounded-[var(--radius-sm)] whitespace-nowrap',
+              'transition-all duration-[var(--transition-fast)]',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)]',
+              'disabled:pointer-events-none disabled:opacity-40',
+              sizeClasses[size],
+              isActive
+                ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow-[var(--shadow-sm)]'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-[var(--color-surface)]/50',
+            )}
+          >
+            {opt.icon && <span className={cn('shrink-0', iconSizes[size])}>{opt.icon}</span>}
+            {opt.label && <span>{opt.label}</span>}
+          </button>
+        )
+      })}
+    </div>
+  )
+}

@@ -14,7 +14,7 @@ export const Sizes: Story = {
   name: 'Sizes · Méretek',
   render: () => (
     <div className="flex items-center gap-6 p-6 bg-[var(--color-bg)]">
-      {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map(size => (
+      {(['xs', 'sm', 'md', 'lg', 'xl'] as const).map((size) => (
         <div key={size} className="flex flex-col items-center gap-2">
           <Spinner size={size} />
           <span className="text-xs font-mono text-[var(--color-text-muted)]">{size}</span>

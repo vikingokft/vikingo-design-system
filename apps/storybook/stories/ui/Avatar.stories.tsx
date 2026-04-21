@@ -14,19 +14,27 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex items-end gap-4 p-4 bg-[var(--color-bg)]">
       <div className="flex flex-col items-center gap-2">
-        <Avatar size="sm"><AvatarFallback>NB</AvatarFallback></Avatar>
+        <Avatar size="sm">
+          <AvatarFallback>NB</AvatarFallback>
+        </Avatar>
         <span className="text-xs text-[var(--color-text-muted)] font-mono">sm</span>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Avatar size="md"><AvatarFallback>NB</AvatarFallback></Avatar>
+        <Avatar size="md">
+          <AvatarFallback>NB</AvatarFallback>
+        </Avatar>
         <span className="text-xs text-[var(--color-text-muted)] font-mono">md</span>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Avatar size="lg"><AvatarFallback>NB</AvatarFallback></Avatar>
+        <Avatar size="lg">
+          <AvatarFallback>NB</AvatarFallback>
+        </Avatar>
         <span className="text-xs text-[var(--color-text-muted)] font-mono">lg</span>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Avatar size="xl"><AvatarFallback>NB</AvatarFallback></Avatar>
+        <Avatar size="xl">
+          <AvatarFallback>NB</AvatarFallback>
+        </Avatar>
         <span className="text-xs text-[var(--color-text-muted)] font-mono">xl</span>
       </div>
     </div>

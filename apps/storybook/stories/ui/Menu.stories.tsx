@@ -1,10 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import {
-  MoreHorizontal, Edit, Copy, Trash2, Pause, Play,
-  Download, Share2, Tag, AlertTriangle, ChevronDown,
-  Settings, LogOut, User, Bell, CreditCard,
-  BarChart2, Filter, SortAsc,
+  MoreHorizontal,
+  Edit,
+  Copy,
+  Trash2,
+  Pause,
+  Play,
+  Download,
+  Share2,
+  Tag,
+  AlertTriangle,
+  ChevronDown,
+  Settings,
+  LogOut,
+  User,
+  Bell,
+  CreditCard,
+  BarChart2,
+  Filter,
+  SortAsc,
 } from 'lucide-react'
 import {
   DropdownMenu,
@@ -118,12 +133,16 @@ export const UserMenu: Story = {
             <DropdownMenuItem>
               <CreditCard className="h-4 w-4" />
               Számlázás
-              <Badge variant="accent" size="sm" className="ml-auto">Pro</Badge>
+              <Badge variant="accent" size="sm" className="ml-auto">
+                Pro
+              </Badge>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Bell className="h-4 w-4" />
               Értesítések
-              <Badge variant="error" size="sm" className="ml-auto">12</Badge>
+              <Badge variant="error" size="sm" className="ml-auto">
+                12
+              </Badge>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="h-4 w-4" />
@@ -216,8 +235,7 @@ export const FilterMenu: Story = {
       cpc: false,
     })
 
-    const toggle = (key: keyof typeof columns) =>
-      setColumns(c => ({ ...c, [key]: !c[key] }))
+    const toggle = (key: keyof typeof columns) => setColumns((c) => ({ ...c, [key]: !c[key] }))
 
     const [sort, setSort] = useState('spend')
 

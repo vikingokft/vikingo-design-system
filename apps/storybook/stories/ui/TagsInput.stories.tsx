@@ -81,9 +81,7 @@ export const Controlled: Story = {
           placeholder="Új cimke…"
           hint="Enter vagy vesszővel adj hozzá."
         />
-        <p className="text-xs text-[var(--color-text-muted)]">
-          Cimkék: {tags.join(', ') || '–'}
-        </p>
+        <p className="text-xs text-[var(--color-text-muted)]">Cimkék: {tags.join(', ') || '–'}</p>
       </div>
     )
   },

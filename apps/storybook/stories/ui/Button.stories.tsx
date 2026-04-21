@@ -73,7 +73,9 @@ export const AllVariants: Story = {
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="outline">Outline</Button>
-      <Button variant="destructive" leftIcon={<Trash2 className="h-4 w-4" />}>Destructive</Button>
+      <Button variant="destructive" leftIcon={<Trash2 className="h-4 w-4" />}>
+        Destructive
+      </Button>
       <Button variant="link">Link</Button>
     </div>
   ),

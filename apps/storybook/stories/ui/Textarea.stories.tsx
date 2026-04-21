@@ -26,10 +26,7 @@ export const States: Story = {
   name: 'States · Állapotok',
   render: () => (
     <div className="flex flex-col gap-4 w-80 p-4 bg-[var(--color-bg)]">
-      <Textarea
-        label="Alap"
-        placeholder="Tartalom..."
-      />
+      <Textarea label="Alap" placeholder="Tartalom..." />
       <Textarea
         label="Kitöltött"
         defaultValue="Ez egy előre kitöltött szöveg, amelyet a felhasználó módosíthat. A textarea automatikusan átméretezhető."
@@ -39,11 +36,7 @@ export const States: Story = {
         defaultValue="Érvénytelen tartalom"
         error="A leírás nem tartalmazhat tilos szavakat."
       />
-      <Textarea
-        label="Letiltott"
-        defaultValue="Ez szerkeszthetetlen"
-        disabled
-      />
+      <Textarea label="Letiltott" defaultValue="Ez szerkeszthetetlen" disabled />
     </div>
   ),
 }

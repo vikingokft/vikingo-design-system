@@ -22,7 +22,28 @@ const PLATFORMS: ComboboxOption[] = [
 
 const COUNTRIES: ComboboxOption[] = Array.from({ length: 20 }, (_, i) => ({
   value: `country-${i}`,
-  label: ['Magyarország', 'Németország', 'Ausztria', 'Románia', 'Csehország', 'Szlovákia', 'Lengyelország', 'Horvátország', 'Szerbia', 'Bulgária', 'Franciaország', 'Olaszország', 'Spanyolország', 'Hollandia', 'Belgium', 'Svájc', 'Svédország', 'Dánia', 'Finnország', 'Norvégia'][i],
+  label: [
+    'Magyarország',
+    'Németország',
+    'Ausztria',
+    'Románia',
+    'Csehország',
+    'Szlovákia',
+    'Lengyelország',
+    'Horvátország',
+    'Szerbia',
+    'Bulgária',
+    'Franciaország',
+    'Olaszország',
+    'Spanyolország',
+    'Hollandia',
+    'Belgium',
+    'Svájc',
+    'Svédország',
+    'Dánia',
+    'Finnország',
+    'Norvégia',
+  ][i],
 }))
 
 export const Single: Story = {

@@ -62,13 +62,19 @@ export const InTable: Story = {
     <div className="w-[600px] rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] overflow-hidden">
       <div className="px-6 py-4 border-b border-[var(--color-border)] flex items-center justify-between">
         <h3 className="font-semibold text-sm">Hirdetések</h3>
-        <Button variant="primary" size="sm">Feltöltés</Button>
+        <Button variant="primary" size="sm">
+          Feltöltés
+        </Button>
       </div>
       <EmptyState
         icon={<Image className="h-6 w-6" />}
         title="Nincsenek hirdetések"
         description="Töltsd fel az első kreatívodat az ad library-be."
-        action={<Button variant="secondary" size="sm">Fájl feltöltése</Button>}
+        action={
+          <Button variant="secondary" size="sm">
+            Fájl feltöltése
+          </Button>
+        }
       />
     </div>
   ),

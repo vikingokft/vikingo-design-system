@@ -9,7 +9,13 @@ const meta: Meta<typeof Topbar> = {
     layout: 'fullscreen',
     docs: { source: { type: 'code' } },
   },
-  decorators: [(Story) => <div className="bg-[var(--color-bg)] min-h-32"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="bg-[var(--color-bg)] min-h-32">
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
 }
 export default meta
@@ -20,9 +26,7 @@ export const Default: Story = {
   render: () => (
     <Topbar
       left={
-        <h1 className="font-display font-semibold text-lg text-[var(--color-text)]">
-          Dashboard
-        </h1>
+        <h1 className="font-display font-semibold text-lg text-[var(--color-text)]">Dashboard</h1>
       }
       right={
         <div className="flex items-center gap-2">
@@ -41,9 +45,7 @@ export const WithAvatar: Story = {
   render: () => (
     <Topbar
       left={
-        <h1 className="font-display font-semibold text-lg text-[var(--color-text)]">
-          Kampányok
-        </h1>
+        <h1 className="font-display font-semibold text-lg text-[var(--color-text)]">Kampányok</h1>
       }
       right={
         <div className="flex items-center gap-2">
@@ -92,16 +94,20 @@ export const WithBadges: Story = {
     <Topbar
       left={
         <div className="flex items-center gap-3">
-          <h1 className="font-display font-semibold text-lg text-[var(--color-text)]">
-            Összesítő
-          </h1>
-          <Badge variant="success" dot>Élő</Badge>
+          <h1 className="font-display font-semibold text-lg text-[var(--color-text)]">Összesítő</h1>
+          <Badge variant="success" dot>
+            Élő
+          </Badge>
         </div>
       }
       right={
         <div className="flex items-center gap-2">
-          <Button variant="secondary" size="sm">Exportálás</Button>
-          <Button size="sm" leftIcon={<Plus className="h-4 w-4" />}>Új kampány</Button>
+          <Button variant="secondary" size="sm">
+            Exportálás
+          </Button>
+          <Button size="sm" leftIcon={<Plus className="h-4 w-4" />}>
+            Új kampány
+          </Button>
         </div>
       }
     />

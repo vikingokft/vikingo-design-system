@@ -1,6 +1,6 @@
 {
   "name": "@vikingo/ui",
-  "version": "0.1.0",
+  "version": "0.5.1",
   "description": "Vikingo Design System – React component library",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

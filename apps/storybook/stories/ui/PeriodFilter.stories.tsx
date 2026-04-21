@@ -6,7 +6,13 @@ const meta: Meta<typeof PeriodFilter> = {
   title: 'Data/Period Filter',
   component: PeriodFilter,
   parameters: { layout: 'centered' },
-  decorators: [(Story) => <div className="p-6 bg-[var(--color-bg)]"><Story /></div>],
+  decorators: [
+    (Story) => (
+      <div className="p-6 bg-[var(--color-bg)]">
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
 }
 export default meta
@@ -25,13 +31,7 @@ export const Default: Story = {
   name: 'Default · Alapértelmezett',
   render: () => {
     const [value, setValue] = useState('30d')
-    return (
-      <PeriodFilter
-        options={defaultOptions}
-        value={value}
-        onChange={setValue}
-      />
-    )
+    return <PeriodFilter options={defaultOptions} value={value} onChange={setValue} />
   },
 }
 

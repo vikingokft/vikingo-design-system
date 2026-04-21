@@ -1,9 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Settings, SlidersHorizontal, Copy, BarChart2, Pencil, Trash2 } from 'lucide-react'
 import {
-  Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle,
-  DrawerDescription, DrawerBody, DrawerFooter, DrawerClose,
-  Button, Input, Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerBody,
+  DrawerFooter,
+  DrawerClose,
+  Button,
+  Input,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
   DatePicker,
 } from '@vikingo/ui'
 
@@ -32,9 +45,13 @@ export const RightSide: Story = {
             <Input label="Kampány neve" placeholder="pl. Nyári akció 2025" />
             <Input label="Napi büdzsé (Ft)" placeholder="pl. 5000" type="number" />
             <div>
-              <label className="text-sm font-medium text-[var(--color-text)] mb-1.5 block">Platform</label>
+              <label className="text-sm font-medium text-[var(--color-text)] mb-1.5 block">
+                Platform
+              </label>
               <Select>
-                <SelectTrigger><SelectValue placeholder="Válassz platformot" /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue placeholder="Válassz platformot" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="meta">Meta Ads</SelectItem>
                   <SelectItem value="google">Google Ads</SelectItem>
@@ -59,7 +76,9 @@ export const LeftSide: Story = {
     <div className="p-6 bg-[var(--color-bg)]">
       <Drawer>
         <DrawerTrigger asChild>
-          <Button variant="secondary" leftIcon={<SlidersHorizontal className="h-4 w-4" />}>Szűrők</Button>
+          <Button variant="secondary" leftIcon={<SlidersHorizontal className="h-4 w-4" />}>
+            Szűrők
+          </Button>
         </DrawerTrigger>
         <DrawerContent side="left" size="sm">
           <DrawerHeader>
@@ -67,9 +86,13 @@ export const LeftSide: Story = {
           </DrawerHeader>
           <DrawerBody className="flex flex-col gap-4">
             <div>
-              <label className="text-sm font-medium text-[var(--color-text)] mb-1.5 block">Státusz</label>
+              <label className="text-sm font-medium text-[var(--color-text)] mb-1.5 block">
+                Státusz
+              </label>
               <Select>
-                <SelectTrigger><SelectValue placeholder="Összes" /></SelectTrigger>
+                <SelectTrigger>
+                  <SelectValue placeholder="Összes" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="active">Aktív</SelectItem>
                   <SelectItem value="paused">Szünetel</SelectItem>
@@ -82,8 +105,12 @@ export const LeftSide: Story = {
             <DatePicker label="Dátumig" placeholder="Válassz dátumot" />
           </DrawerBody>
           <DrawerFooter>
-            <Button variant="ghost" size="sm">Törlés</Button>
-            <Button variant="primary" size="sm">Alkalmazás</Button>
+            <Button variant="ghost" size="sm">
+              Törlés
+            </Button>
+            <Button variant="primary" size="sm">
+              Alkalmazás
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

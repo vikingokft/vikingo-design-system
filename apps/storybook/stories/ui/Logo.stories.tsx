@@ -19,7 +19,10 @@ type Story = StoryObj<typeof Logo>
 export const OnDarkBackground: Story = {
   name: 'On Dark Background · Sötét háttéren',
   render: () => (
-    <div className="flex flex-col gap-6 p-8 rounded-[var(--radius-lg)]" style={{ background: '#3E2E45' }}>
+    <div
+      className="flex flex-col gap-6 p-8 rounded-[var(--radius-lg)]"
+      style={{ background: '#3E2E45' }}
+    >
       <Logo variant="white" name="Vikingo" size="lg" />
       <Logo variant="white" name="Vikingo" size="md" />
       <Logo variant="white" name="Vikingo" size="sm" />

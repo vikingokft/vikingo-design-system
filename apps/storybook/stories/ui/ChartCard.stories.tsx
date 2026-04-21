@@ -1,5 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { ChartCard, AreaChart, MultiBarChart, MultiLineChart, formatFt, formatSzam } from '@vikingo/ui'
+import {
+  ChartCard,
+  AreaChart,
+  MultiBarChart,
+  MultiLineChart,
+  formatFt,
+  formatSzam,
+} from '@vikingo/ui'
 
 const meta: Meta<typeof ChartCard> = {
   title: 'Data/Chart Card',
@@ -29,9 +36,14 @@ const mrrData = mrrDates.map((x, i) => ({
 const adDates = generateDates(30)
 const adSpendData = adDates.map((x, i) => ({
   x,
-  facebook: Math.max(0, Math.round(
-    80_000 + (i >= 10 && i <= 20 ? (i - 10) * 16_000 : i > 20 ? (30 - i) * 11_000 : 0) + (i % 3) * 15_000
-  )),
+  facebook: Math.max(
+    0,
+    Math.round(
+      80_000 +
+        (i >= 10 && i <= 20 ? (i - 10) * 16_000 : i > 20 ? (30 - i) * 11_000 : 0) +
+        (i % 3) * 15_000,
+    ),
+  ),
   tiktok: Math.max(0, Math.round(3_000 + (i % 5) * 2_000)),
 }))
 
@@ -45,11 +57,17 @@ const mrrSubData = mrrSubDates.map((x, i) => ({
 const acqDates = generateDates(30)
 const acqData = acqDates.map((x, i) => ({
   x,
-  koltes: Math.max(0, Math.round(
-    (i < 10 ? 5_000 + i * 2_000
-      : i < 20 ? 20_000 + (i - 10) * 22_000
-      : 240_000 - (i - 20) * 25_000) + (i % 3) * 8_000
-  )),
+  koltes: Math.max(
+    0,
+    Math.round(
+      (i < 10
+        ? 5_000 + i * 2_000
+        : i < 20
+          ? 20_000 + (i - 10) * 22_000
+          : 240_000 - (i - 20) * 25_000) +
+        (i % 3) * 8_000,
+    ),
+  ),
   ujElofizeto: Math.max(0, Math.round((i > 12 ? 4 : 0) + (i % 4) * 3)),
   ujTrial: Math.max(0, Math.round((i > 15 ? 8 : 0) + (i % 5) * 4)),
 }))
@@ -140,8 +158,20 @@ export const AdSpendVsAcquisition: Story = {
           xAxisKey="x"
           lines={[
             { dataKey: 'koltes', color: '#7C3AED', label: 'Költés', yAxisId: 'left' },
-            { dataKey: 'ujElofizeto', color: '#FF544D', label: 'Új előfizető', dashed: true, yAxisId: 'right' },
-            { dataKey: 'ujTrial', color: '#F59E0B', label: 'Új trial', dotted: true, yAxisId: 'right' },
+            {
+              dataKey: 'ujElofizeto',
+              color: '#FF544D',
+              label: 'Új előfizető',
+              dashed: true,
+              yAxisId: 'right',
+            },
+            {
+              dataKey: 'ujTrial',
+              color: '#F59E0B',
+              label: 'Új trial',
+              dotted: true,
+              yAxisId: 'right',
+            },
           ]}
           leftValueFormatter={formatFt}
           rightValueFormatter={formatSzam}

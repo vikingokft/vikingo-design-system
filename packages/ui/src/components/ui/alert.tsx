@@ -94,23 +94,28 @@ function Alert({
   )
 }
 
-const AlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
+function AlertTitle({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement> & { ref?: React.Ref<HTMLHeadingElement> }) {
+  return (
     <h5
       ref={ref}
       className={cn('font-semibold leading-none tracking-tight', className)}
       {...props}
     />
-  ),
-)
-AlertTitle.displayName = 'AlertTitle'
+  )
+}
 
-const AlertDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('text-sm text-[var(--color-text-muted)]', className)} {...props} />
-))
-AlertDescription.displayName = 'AlertDescription'
+function AlertDescription({
+  className,
+  ref,
+  ...props
+}: React.HTMLAttributes<HTMLParagraphElement> & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <div ref={ref} className={cn('text-sm text-[var(--color-text-muted)]', className)} {...props} />
+  )
+}
 
 export { Alert, AlertTitle, AlertDescription }

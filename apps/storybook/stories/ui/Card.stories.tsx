@@ -1,8 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { MoreHorizontal, TrendingUp } from 'lucide-react'
 import {
-  Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
-  Button, Badge,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Button,
+  Badge,
 } from '@vikingo/ui'
 
 const meta: Meta = {
@@ -28,7 +34,9 @@ export const Default: Story = {
         </p>
       </CardContent>
       <CardFooter className="justify-between">
-        <Badge variant="success" dot>Aktív</Badge>
+        <Badge variant="success" dot>
+          Aktív
+        </Badge>
         <Button variant="ghost" size="icon-sm">
           <MoreHorizontal className="h-4 w-4" />
         </Button>
@@ -61,8 +69,12 @@ export const MetricCard: Story = {
       <CardContent className="pt-6">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)]">Bevétel</p>
-            <p className="mt-1 text-3xl font-display font-semibold text-[var(--color-text)]">€48,920</p>
+            <p className="text-xs font-mono uppercase tracking-widest text-[var(--color-text-muted)]">
+              Bevétel
+            </p>
+            <p className="mt-1 text-3xl font-display font-semibold text-[var(--color-text)]">
+              €48,920
+            </p>
           </div>
           <div className="flex items-center gap-1 text-[var(--color-success)] bg-[var(--color-success-muted)] px-2 py-1 rounded-[var(--radius-sm)]">
             <TrendingUp className="h-3.5 w-3.5" />
@@ -86,10 +98,16 @@ export const CardGrid: Story = {
         { title: 'Bevétel', value: '€48k', badge: 'Növekvő', badgeVariant: 'success' as const },
       ].map((item) => (
         <Card hover key={item.title} className="p-4">
-          <p className="text-xs font-mono text-[var(--color-text-muted)] uppercase tracking-widest">{item.title}</p>
-          <p className="mt-2 text-2xl font-display font-semibold text-[var(--color-text)]">{item.value}</p>
+          <p className="text-xs font-mono text-[var(--color-text-muted)] uppercase tracking-widest">
+            {item.title}
+          </p>
+          <p className="mt-2 text-2xl font-display font-semibold text-[var(--color-text)]">
+            {item.value}
+          </p>
           <div className="mt-3">
-            <Badge variant={item.badgeVariant} dot>{item.badge}</Badge>
+            <Badge variant={item.badgeVariant} dot>
+              {item.badge}
+            </Badge>
           </div>
         </Card>
       ))}

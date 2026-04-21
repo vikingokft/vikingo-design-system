@@ -28,7 +28,9 @@ export const Default: Story = {
         <PageHeader
           title="Összesítő"
           description="Összes forrás · 30 nap"
-          periodFilter={<PeriodFilter options={periodOptions} value={period} onChange={setPeriod} />}
+          periodFilter={
+            <PeriodFilter options={periodOptions} value={period} onChange={setPeriod} />
+          }
           lastUpdated="12:36:14"
         />
       </div>
@@ -50,7 +52,9 @@ export const WithIconAndActions: Story = {
               <Megaphone className="h-5 w-5 text-white" />
             </div>
           }
-          periodFilter={<PeriodFilter options={periodOptions} value={period} onChange={setPeriod} />}
+          periodFilter={
+            <PeriodFilter options={periodOptions} value={period} onChange={setPeriod} />
+          }
           lastUpdated="12:36:14"
           actions={<Button size="sm">Exportálás</Button>}
         />
@@ -63,10 +67,7 @@ export const Simple: Story = {
   name: 'Simple · Egyszerű',
   render: () => (
     <div className="bg-[var(--color-bg)] p-6">
-      <PageHeader
-        title="Beállítások"
-        description="Fiók és értesítési preferenciák"
-      />
+      <PageHeader title="Beállítások" description="Fiók és értesítési preferenciák" />
     </div>
   ),
 }

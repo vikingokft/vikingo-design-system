@@ -37,7 +37,14 @@ export interface SpinnerProps
 
 import type React from 'react'
 
-export function Spinner({ size, variant, label, ariaLabel = 'Betöltés...', className, ...props }: SpinnerProps) {
+export function Spinner({
+  size,
+  variant,
+  label,
+  ariaLabel = 'Betöltés...',
+  className,
+  ...props
+}: SpinnerProps) {
   return (
     <span
       role="status"

@@ -2,8 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import {
-  Pagination, PaginationContent, PaginationItem,
-  PaginationLink, PaginationNext, PaginationPrevious, PaginationEllipsis,
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  PaginationEllipsis,
 } from '@vikingo/ui'
 
 const meta: Meta = {
@@ -26,11 +31,11 @@ export const Default: Story = {
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious
-                onClick={() => setPage(p => Math.max(1, p - 1))}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
                 className={page <= 1 ? 'pointer-events-none opacity-50' : ''}
               />
             </PaginationItem>
-            {Array.from({ length: total }, (_, i) => i + 1).map(p => (
+            {Array.from({ length: total }, (_, i) => i + 1).map((p) => (
               <PaginationItem key={p}>
                 <PaginationLink isActive={p === page} onClick={() => setPage(p)}>
                   {p}
@@ -39,7 +44,7 @@ export const Default: Story = {
             ))}
             <PaginationItem>
               <PaginationNext
-                onClick={() => setPage(p => Math.min(total, p + 1))}
+                onClick={() => setPage((p) => Math.min(total, p + 1))}
                 className={page >= total ? 'pointer-events-none opacity-50' : ''}
               />
             </PaginationItem>
@@ -63,27 +68,39 @@ export const WithEllipsis: Story = {
         <Pagination>
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious onClick={() => setPage(p => Math.max(1, p - 1))} />
+              <PaginationPrevious onClick={() => setPage((p) => Math.max(1, p - 1))} />
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink isActive={page === 1} onClick={() => setPage(1)}>1</PaginationLink>
+              <PaginationLink isActive={page === 1} onClick={() => setPage(1)}>
+                1
+              </PaginationLink>
             </PaginationItem>
             {page > 3 && (
-              <PaginationItem><PaginationEllipsis /></PaginationItem>
-            )}
-            {[page - 1, page, page + 1].filter(p => p > 1 && p < 20).map(p => (
-              <PaginationItem key={p}>
-                <PaginationLink isActive={p === page} onClick={() => setPage(p)}>{p}</PaginationLink>
+              <PaginationItem>
+                <PaginationEllipsis />
               </PaginationItem>
-            ))}
+            )}
+            {[page - 1, page, page + 1]
+              .filter((p) => p > 1 && p < 20)
+              .map((p) => (
+                <PaginationItem key={p}>
+                  <PaginationLink isActive={p === page} onClick={() => setPage(p)}>
+                    {p}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
             {page < 18 && (
-              <PaginationItem><PaginationEllipsis /></PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
             )}
             <PaginationItem>
-              <PaginationLink isActive={page === 20} onClick={() => setPage(20)}>20</PaginationLink>
+              <PaginationLink isActive={page === 20} onClick={() => setPage(20)}>
+                20
+              </PaginationLink>
             </PaginationItem>
             <PaginationItem>
-              <PaginationNext onClick={() => setPage(p => Math.min(20, p + 1))} />
+              <PaginationNext onClick={() => setPage((p) => Math.min(20, p + 1))} />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
@@ -108,13 +125,13 @@ export const IconOnly: Story = {
             <PaginationItem>
               <PaginationLink
                 aria-label="Előző oldal"
-                onClick={() => setPage(p => Math.max(1, p - 1))}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
                 className={page <= 1 ? 'pointer-events-none opacity-50' : ''}
               >
                 <ChevronLeft className="h-4 w-4" />
               </PaginationLink>
             </PaginationItem>
-            {Array.from({ length: total }, (_, i) => i + 1).map(p => (
+            {Array.from({ length: total }, (_, i) => i + 1).map((p) => (
               <PaginationItem key={p}>
                 <PaginationLink isActive={p === page} onClick={() => setPage(p)}>
                   {p}
@@ -124,7 +141,7 @@ export const IconOnly: Story = {
             <PaginationItem>
               <PaginationLink
                 aria-label="Következő oldal"
-                onClick={() => setPage(p => Math.min(total, p + 1))}
+                onClick={() => setPage((p) => Math.min(total, p + 1))}
                 className={page >= total ? 'pointer-events-none opacity-50' : ''}
               >
                 <ChevronRight className="h-4 w-4" />

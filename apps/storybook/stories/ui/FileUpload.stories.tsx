@@ -14,10 +14,7 @@ export const Default: Story = {
   name: 'Default · Alapértelmezett',
   render: () => (
     <div className="w-96 p-6 bg-[var(--color-bg)]">
-      <FileUpload
-        hint="PNG, JPG, GIF maximum 10 MB"
-        maxSize={10 * 1024 * 1024}
-      />
+      <FileUpload hint="PNG, JPG, GIF maximum 10 MB" maxSize={10 * 1024 * 1024} />
     </div>
   ),
 }
@@ -26,11 +23,7 @@ export const ImageOnly: Story = {
   name: 'Image Only · Képfájl',
   render: () => (
     <div className="w-96 p-6 bg-[var(--color-bg)]">
-      <FileUpload
-        accept="image/*"
-        hint="PNG, JPG, WEBP – max. 5 MB"
-        maxSize={5 * 1024 * 1024}
-      />
+      <FileUpload accept="image/*" hint="PNG, JPG, WEBP – max. 5 MB" maxSize={5 * 1024 * 1024} />
     </div>
   ),
 }
@@ -49,7 +42,9 @@ export const MultipleFiles: Story = {
           onFileSelect={setFiles}
         />
         {files.length > 0 && (
-          <p className="text-xs text-[var(--color-text-muted)] mt-2">{files.length} fájl kiválasztva</p>
+          <p className="text-xs text-[var(--color-text-muted)] mt-2">
+            {files.length} fájl kiválasztva
+          </p>
         )}
       </div>
     )
@@ -60,10 +55,7 @@ export const WithProgress: Story = {
   name: 'Uploading · Feltöltés közben',
   render: () => (
     <div className="w-96 p-6 bg-[var(--color-bg)]">
-      <FileUpload
-        progress={62}
-        hint="PNG, JPG – max. 10 MB"
-      />
+      <FileUpload progress={62} hint="PNG, JPG – max. 10 MB" />
     </div>
   ),
 }
@@ -84,11 +76,7 @@ export const WithSuccess: Story = {
   name: 'Success · Sikeres feltöltés',
   render: () => (
     <div className="w-96 p-6 bg-[var(--color-bg)]">
-      <FileUpload
-        success="A fájl sikeresen feltöltve!"
-        disabled
-        hint="PNG, JPG – max. 10 MB"
-      />
+      <FileUpload success="A fájl sikeresen feltöltve!" disabled hint="PNG, JPG – max. 10 MB" />
     </div>
   ),
 }

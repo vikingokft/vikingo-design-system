@@ -27,7 +27,9 @@ export const Default: Story = {
         </TabsContent>
         <TabsContent value="analytics">
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
-            <p className="text-sm text-[var(--color-text-muted)]">Analitikai adatok megjelenítése</p>
+            <p className="text-sm text-[var(--color-text-muted)]">
+              Analitikai adatok megjelenítése
+            </p>
           </div>
         </TabsContent>
         <TabsContent value="settings">
@@ -77,7 +79,9 @@ export const WithIconsAndBadge: Story = {
           <TabsTrigger value="campaigns" className="gap-1.5">
             <Megaphone className="h-3.5 w-3.5" />
             Kampányok
-            <Badge variant="accent" size="sm">12</Badge>
+            <Badge variant="accent" size="sm">
+              12
+            </Badge>
           </TabsTrigger>
           <TabsTrigger value="ads" className="gap-1.5">
             <Image className="h-3.5 w-3.5" />

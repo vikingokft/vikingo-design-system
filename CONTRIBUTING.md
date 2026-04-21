@@ -57,7 +57,7 @@ Follow these steps in order:
 Every component must follow this exact structure:
 
 ```tsx
-import * as React from 'react'
+import type * as React from 'react'
 import { cn } from '../../lib/utils'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -78,34 +78,39 @@ export interface ExampleProps {
  * @example
  * <Example variant="primary" label="Mentés" />
  */
-export const Example = React.forwardRef<HTMLDivElement, ExampleProps>(
-  ({ variant = 'primary', label = 'Alapértelmezett', className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'base-classes',
-          variant === 'secondary' && 'secondary-classes',
-          className,
-        )}
-        {...props}
-      >
-        {label}
-      </div>
-    )
-  },
-)
-Example.displayName = 'Example'
+export function Example({
+  variant = 'primary',
+  label = 'Alapértelmezett',
+  className,
+  ref,
+  ...props
+}: ExampleProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'base-classes',
+        variant === 'secondary' && 'secondary-classes',
+        className,
+      )}
+      {...props}
+    >
+      {label}
+    </div>
+  )
+}
 ```
+
+> **React 19 ref-as-prop.** Do not use `React.forwardRef` for new components — React 19 treats `ref` as a regular prop on function components. Named function declarations get an automatic `displayName` from the function name, so no explicit `.displayName = '…'` assignment is needed either.
 
 ### Rules
 
 | Rule | Why |
 |---|---|
-| Always `React.forwardRef` | Ref forwarding is required for composability |
-| Always set `displayName` | Required for React DevTools and Storybook autodocs |
+| Plain function component + `ref` prop | React 19 native ref-as-prop — no `forwardRef` wrapper, no explicit `displayName` |
 | Always use `cn()` for classNames | Enables prop-level className overrides |
-| CSS custom properties only | No hardcoded colors, radius, or shadows |
+| CSS custom properties only | No hardcoded colors, radius, shadows, or durations |
+| Motion via `var(--duration-*)` + `var(--ease-*)` | Keeps timing tokens consistent; respects `prefers-reduced-motion` globally |
 | User-visible strings as props | Hungarian defaults, consumer can override |
 | JSDoc on the component and non-obvious props | Powers Storybook autodocs descriptions |
 
@@ -121,8 +126,10 @@ Never use hardcoded values. Use these tokens:
 | Accent | `--color-accent` · `--color-accent-hover` · `--color-accent-muted` |
 | Status | `--color-success` · `--color-warning` · `--color-error` · `--color-info` |
 | Radius | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-xl` · `--radius-full` |
-| Shadow | `--shadow-sm` · `--shadow-md` · `--shadow-lg` |
-| Transition | `--transition-fast` |
+| Shadow | `--shadow-sm` · `--shadow-md` · `--shadow-lg` · `--shadow-xl` |
+| Duration | `--duration-fast` (120ms) · `--duration-base` (200ms) · `--duration-slow` (320ms) |
+| Easing | `--ease-out-quint` (default) · `--ease-in-out` · `--ease-soft` |
+| Transition (aliases) | `--transition-fast` · `--transition-base` · `--transition-slow` — duration + easing combined |
 
 ---
 

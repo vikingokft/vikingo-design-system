@@ -86,11 +86,31 @@ export const AdLibraryGrid: Story = {
   render: () => (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-4 bg-[var(--color-bg)]">
       {[
-        { title: 'Nyári akció – story', tags: ['story', 'mobil'], badge: 'Aktív', badgeVariant: 'success' as const },
-        { title: 'Karácsonyi sale – banner', tags: ['banner', 'desktop'], badge: 'Szüneteltetve', badgeVariant: 'warning' as const },
+        {
+          title: 'Nyári akció – story',
+          tags: ['story', 'mobil'],
+          badge: 'Aktív',
+          badgeVariant: 'success' as const,
+        },
+        {
+          title: 'Karácsonyi sale – banner',
+          tags: ['banner', 'desktop'],
+          badge: 'Szüneteltetve',
+          badgeVariant: 'warning' as const,
+        },
         { title: 'Brand awareness – video', tags: ['video', 'awareness'] },
-        { title: 'Remarketing – carousel', tags: ['carousel', 'remarketing'], badge: 'Aktív', badgeVariant: 'success' as const },
-        { title: 'Promo – reel', tags: ['reel', 'mobil'], badge: 'Befejezett', badgeVariant: 'default' as const },
+        {
+          title: 'Remarketing – carousel',
+          tags: ['carousel', 'remarketing'],
+          badge: 'Aktív',
+          badgeVariant: 'success' as const,
+        },
+        {
+          title: 'Promo – reel',
+          tags: ['reel', 'mobil'],
+          badge: 'Befejezett',
+          badgeVariant: 'default' as const,
+        },
         { title: 'Flash sale – DPA', tags: ['dpa', 'katalógus'] },
       ].map((item, i) => (
         <ImageCard
