@@ -1,0 +1,44 @@
+/*
+ * Vikingo Design System – Fonts
+ *
+ * Clash Display  → headings (h1-h4), Semibold 600
+ * DM Sans        → body, UI text, buttons, labels
+ * DM Mono        → monospace, data, code, badges
+ *
+ * DM Sans + DM Mono: loaded via Google Fonts in consumer app (next/font/google)
+ * OR imported from CDN below as fallback.
+ */
+
+/* ===== Clash Display (self-hosted from package assets) ===== */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('../../../assets/fonts/ClashDisplay-Variable.woff2') format('woff2');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('../../../assets/fonts/ClashDisplay-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('../../../assets/fonts/ClashDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('../../../assets/fonts/ClashDisplay-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+

@@ -13,17 +13,27 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      // Specifikus subpath alias-ok az általános elé kell kerüljenek
+      // Subpath aliases must precede the generic '@vikingo/ui' resolver below.
       {
+        find: '@vikingo/ui/styles/react',
+        replacement: resolve(__dirname, '../../packages/ui/src/styles/react.css'),
+      },
+      {
+        // Backwards-compat alias for the legacy '@vikingo/ui/styles' import.
         find: '@vikingo/ui/styles',
-        replacement: resolve(__dirname, '../../packages/ui/src/styles/globals.css'),
+        replacement: resolve(__dirname, '../../packages/ui/src/styles/react.css'),
       },
       {
-        find: '@vikingo/ui/fonts',
-        replacement: resolve(__dirname, '../../packages/ui/src/styles/fonts.css'),
+        find: '@vikingo/ui/fonts/inter-bundled',
+        replacement: resolve(__dirname, '../../packages/ui/src/styles/fonts/inter-bundled.css'),
       },
-      // TypeScript forrás közvetlen használata — elkerüli a dist externalization
-      // hibákat (recharts és más jövőbeli @vikingo/ui függőségek esetén)
+      {
+        // Legacy '@vikingo/ui/fonts' alias.
+        find: '@vikingo/ui/fonts',
+        replacement: resolve(__dirname, '../../packages/ui/src/styles/fonts/inter-bundled.css'),
+      },
+      // Use the TypeScript source directly to avoid `dist/` externalization issues
+      // (e.g. recharts and any future @vikingo/ui peer-dependency surprises).
       {
         find: '@vikingo/ui',
         replacement: resolve(__dirname, '../../packages/ui/src/index.ts'),

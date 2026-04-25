@@ -1,6 +1,6 @@
 {
   "name": "@vikingo/ui",
-  "version": "0.5.1",
+  "version": "0.8.0",
   "description": "Vikingo Design System – React component library",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -12,16 +12,43 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./html": {
+      "source": "./src/web-components/index.ts",
+      "types": "./dist/html.d.ts",
+      "import": "./dist/html.mjs",
+      "require": "./dist/html.js"
+    },
+    "./styles/react": {
+      "source": "./src/styles/react.css",
+      "default": "./dist/react.css"
+    },
+    "./styles/react-offline": {
+      "source": "./src/styles/react-offline.css",
+      "default": "./dist/react-offline.css"
+    },
+    "./styles/tokens": {
+      "source": "./src/styles/tokens.css",
+      "default": "./dist/tokens.css"
+    },
+    "./styles/vanilla": {
+      "source": "./src/styles/vanilla.css",
+      "default": "./dist/vanilla.css"
+    },
+    "./fonts/inter-cdn": {
+      "source": "./src/styles/fonts/inter-cdn.css",
+      "default": "./dist/fonts/inter-cdn.css"
+    },
+    "./fonts/inter-bundled": {
+      "source": "./src/styles/fonts/inter-bundled.css",
+      "default": "./dist/fonts/inter-bundled.css"
+    },
     "./styles": {
-      "source": "./src/styles/globals.css",
       "default": "./dist/globals.css"
     },
     "./styles/no-cdn": {
-      "source": "./src/styles/globals-no-cdn.css",
       "default": "./dist/globals-no-cdn.css"
     },
     "./styles/google-fonts": {
-      "source": "./src/styles/google-fonts.css",
       "default": "./dist/google-fonts.css"
     },
     "./fonts": "./dist/fonts.css"

@@ -1,0 +1,16 @@
+/*
+ * Vikingo Design System — React + Tailwind v4 entry CSS (offline / no CDN)
+ *
+ * Same as react.css but WITHOUT the Google Fonts CDN @import. Use this for:
+ *   - Chrome Extensions (Manifest v3 CSP blocks remote @import)
+ *   - Offline desktop apps
+ *   - Apps that load DM Sans / DM Mono via next/font/google or self-hosted woff2
+ *
+ * Consumer import: `import '@vikingo/ui/styles/react-offline'`
+ */
+@import "tailwindcss";
+@import "./fonts/inter-bundled.css";
+@import "./tokens.css";
+@import "./_react-base.css";
+@source "../**/*.{ts,tsx}";
+@source "../../../../apps/storybook/stories/**/*.tsx";

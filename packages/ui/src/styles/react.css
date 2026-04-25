@@ -1,0 +1,17 @@
+/*
+ * Vikingo Design System — React + Tailwind v4 entry CSS (with Google Fonts CDN)
+ *
+ * Loads design tokens, fonts (CDN + local), and Tailwind v4. Use this in apps that
+ * bundle Tailwind v4 and can fetch from fonts.googleapis.com.
+ *
+ * For Chrome Extensions / offline apps that block CDN imports, use react-offline.css.
+ *
+ * Consumer import: `import '@vikingo/ui/styles/react'`
+ */
+@import "./fonts/inter-cdn.css";
+@import "tailwindcss";
+@import "./fonts/inter-bundled.css";
+@import "./tokens.css";
+@import "./_react-base.css";
+@source "../**/*.{ts,tsx}";
+@source "../../../../apps/storybook/stories/**/*.tsx";

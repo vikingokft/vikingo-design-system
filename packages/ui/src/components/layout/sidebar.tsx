@@ -2,9 +2,9 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import type * as React from 'react'
-import { cn } from '../../lib/utils'
-import { Badge } from '../ui/badge'
-import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip'
+import { cn } from '../../utils/cn'
+import { Badge } from '../primitives/badge'
+import { Tooltip, TooltipContent, TooltipTrigger } from '../primitives/tooltip'
 
 export interface NavItem {
   label: string

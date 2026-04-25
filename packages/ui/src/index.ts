@@ -20,12 +20,12 @@ export {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from './components/ui/accordion'
-export type { AlertProps } from './components/ui/alert'
-export { Alert, AlertDescription, AlertTitle } from './components/ui/alert'
-export { Avatar, AvatarFallback, AvatarImage } from './components/ui/avatar'
-export type { BadgeProps } from './components/ui/badge'
-export { Badge, badgeVariants } from './components/ui/badge'
+} from './components/primitives/accordion'
+export type { AlertProps } from './components/primitives/alert'
+export { Alert, AlertDescription, AlertTitle } from './components/primitives/alert'
+export { Avatar, AvatarFallback, AvatarImage } from './components/primitives/avatar'
+export type { BadgeProps } from './components/primitives/badge'
+export { Badge, badgeVariants } from './components/primitives/badge'
 export {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -34,12 +34,12 @@ export {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from './components/ui/breadcrumb'
-export type { ButtonProps } from './components/ui/button'
+} from './components/primitives/breadcrumb'
+export type { ButtonProps } from './components/primitives/button'
 // UI Components
-export { Button, buttonVariants } from './components/ui/button'
-export type { ColumnDef, DataTableProps } from './components/ui/data-table'
-export { DataTable } from './components/ui/data-table'
+export { Button, buttonVariants } from './components/primitives/button'
+export type { ColumnDef, DataTableProps } from './components/primitives/data-table'
+export { DataTable } from './components/primitives/data-table'
 export {
   Card,
   CardContent,
@@ -47,25 +47,25 @@ export {
   CardFooter,
   CardHeader,
   CardTitle,
-} from './components/ui/card'
-export type { CarouselItemProps, CarouselProps } from './components/ui/carousel'
-export { Carousel, CarouselItem } from './components/ui/carousel'
-export type { CopyButtonProps } from './components/ui/copy-button'
-export { CopyButton } from './components/ui/copy-button'
-export type { ChartCardProps } from './components/ui/chart-card'
-export { ChartCard } from './components/ui/chart-card'
-export { Checkbox } from './components/ui/checkbox'
-export type { ChipGroupProps, ChipProps } from './components/ui/chip'
+} from './components/primitives/card'
+export type { CarouselItemProps, CarouselProps } from './components/primitives/carousel'
+export { Carousel, CarouselItem } from './components/primitives/carousel'
+export type { CopyButtonProps } from './components/primitives/copy-button'
+export { CopyButton } from './components/primitives/copy-button'
+export type { ChartCardProps } from './components/primitives/chart-card'
+export { ChartCard } from './components/primitives/chart-card'
+export { Checkbox } from './components/primitives/checkbox'
+export type { ChipGroupProps, ChipProps } from './components/primitives/chip'
 
-export { Chip, ChipGroup } from './components/ui/chip'
-export type { ComboboxOption, ComboboxProps } from './components/ui/combobox'
-export { Combobox } from './components/ui/combobox'
+export { Chip, ChipGroup } from './components/primitives/chip'
+export type { ComboboxOption, ComboboxProps } from './components/primitives/combobox'
+export { Combobox } from './components/primitives/combobox'
 export type {
   CommandEmptyProps,
   CommandGroupProps,
   CommandItemProps,
   CommandPaletteProps,
-} from './components/ui/command-palette'
+} from './components/primitives/command-palette'
 // CommandPalette
 export {
   CommandEmpty,
@@ -75,11 +75,15 @@ export {
   CommandPaletteTrigger,
   CommandSeparator,
   useCommandPalette,
-} from './components/ui/command-palette'
-export type { ConfirmDialogProps } from './components/ui/confirm-dialog'
-export { ConfirmDialog } from './components/ui/confirm-dialog'
-export type { DatePickerProps, DateRange, DateRangePickerProps } from './components/ui/date-picker'
-export { DatePicker, DateRangePicker } from './components/ui/date-picker'
+} from './components/primitives/command-palette'
+export type { ConfirmDialogProps } from './components/primitives/confirm-dialog'
+export { ConfirmDialog } from './components/primitives/confirm-dialog'
+export type {
+  DatePickerProps,
+  DateRange,
+  DateRangePickerProps,
+} from './components/primitives/date-picker'
+export { DatePicker, DateRangePicker } from './components/primitives/date-picker'
 // Overlay Components
 export {
   Dialog,
@@ -92,8 +96,8 @@ export {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from './components/ui/dialog'
-export type { DrawerContentProps } from './components/ui/drawer'
+} from './components/primitives/dialog'
+export type { DrawerContentProps } from './components/primitives/drawer'
 export {
   Drawer,
   DrawerBody,
@@ -106,7 +110,7 @@ export {
   DrawerPortal,
   DrawerTitle,
   DrawerTrigger,
-} from './components/ui/drawer'
+} from './components/primitives/drawer'
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -123,13 +127,13 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from './components/ui/dropdown-menu'
-export type { EmptyStateProps } from './components/ui/empty-state'
+} from './components/primitives/dropdown-menu'
+export type { EmptyStateProps } from './components/primitives/empty-state'
 // New components
-export { EmptyState } from './components/ui/empty-state'
-export type { FileUploadProps } from './components/ui/file-upload'
-export { FileUpload } from './components/ui/file-upload'
-export type { FormLabelProps } from './components/ui/form'
+export { EmptyState } from './components/primitives/empty-state'
+export type { FileUploadProps } from './components/primitives/file-upload'
+export { FileUpload } from './components/primitives/file-upload'
+export type { FormLabelProps } from './components/primitives/form'
 // Form (react-hook-form integration)
 export {
   Form,
@@ -140,27 +144,27 @@ export {
   FormLabel,
   FormMessage,
   useFormField,
-} from './components/ui/form'
-export type { ImageCardProps } from './components/ui/image-card'
-export { ImageCard } from './components/ui/image-card'
-export type { InputProps } from './components/ui/input'
-export { Input } from './components/ui/input'
-export type { LogoProps } from './components/ui/logo'
+} from './components/primitives/form'
+export type { ImageCardProps } from './components/primitives/image-card'
+export { ImageCard } from './components/primitives/image-card'
+export type { InputProps } from './components/primitives/input'
+export { Input } from './components/primitives/input'
+export type { LogoProps } from './components/primitives/logo'
 // Brand
-export { Logo } from './components/ui/logo'
-export type { MetricRowProps } from './components/ui/metric-row'
-export { MetricRow } from './components/ui/metric-row'
-export type { NumberInputProps } from './components/ui/number-input'
-export { NumberInput } from './components/ui/number-input'
-export type { PageHeaderProps } from './components/ui/page-header'
-export { PageHeader } from './components/ui/page-header'
+export { Logo } from './components/primitives/logo'
+export type { MetricRowProps } from './components/primitives/metric-row'
+export { MetricRow } from './components/primitives/metric-row'
+export type { NumberInputProps } from './components/primitives/number-input'
+export { NumberInput } from './components/primitives/number-input'
+export type { PageHeaderProps } from './components/primitives/page-header'
+export { PageHeader } from './components/primitives/page-header'
 export {
   Popover,
   PopoverAnchor,
   PopoverClose,
   PopoverContent,
   PopoverTrigger,
-} from './components/ui/popover'
+} from './components/primitives/popover'
 export {
   Pagination,
   PaginationContent,
@@ -169,14 +173,14 @@ export {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from './components/ui/pagination'
-export type { PeriodFilterProps, PeriodOption } from './components/ui/period-filter'
-export { PeriodFilter } from './components/ui/period-filter'
-export { Progress } from './components/ui/progress'
-export type { RadioButtonProps } from './components/ui/radio-group'
-export { RadioButton, RadioGroup, RadioGroupItem } from './components/ui/radio-group'
-export type { SearchBarProps, SearchResult } from './components/ui/search'
-export { SearchBar } from './components/ui/search'
+} from './components/primitives/pagination'
+export type { PeriodFilterProps, PeriodOption } from './components/primitives/period-filter'
+export { PeriodFilter } from './components/primitives/period-filter'
+export { Progress } from './components/primitives/progress'
+export type { RadioButtonProps } from './components/primitives/radio-group'
+export { RadioButton, RadioGroup, RadioGroupItem } from './components/primitives/radio-group'
+export type { SearchBarProps, SearchResult } from './components/primitives/search-bar'
+export { SearchBar } from './components/primitives/search-bar'
 export {
   Select,
   SelectContent,
@@ -188,32 +192,35 @@ export {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from './components/ui/select'
-export { Separator } from './components/ui/separator'
+} from './components/primitives/select'
+export { Separator } from './components/primitives/separator'
 export type {
   SkeletonButtonProps,
   SkeletonCardProps,
   SkeletonCircleProps,
   SkeletonTextProps,
-} from './components/ui/skeleton'
+} from './components/primitives/skeleton'
 export {
   Skeleton,
   SkeletonButton,
   SkeletonCard,
   SkeletonCircle,
   SkeletonText,
-} from './components/ui/skeleton'
-export { Slider } from './components/ui/slider'
-export type { SpinnerProps } from './components/ui/spinner'
+} from './components/primitives/skeleton'
+export { Slider } from './components/primitives/slider'
+export type { SpinnerProps } from './components/primitives/spinner'
 // New components
-export { Spinner } from './components/ui/spinner'
-export type { StatCardProps } from './components/ui/stat-card'
-export { StatCard } from './components/ui/stat-card'
-export { Switch } from './components/ui/switch'
-export type { SegmentedControlProps, SegmentedOption } from './components/ui/segmented-control'
-export { SegmentedControl } from './components/ui/segmented-control'
-export type { TagsInputProps } from './components/ui/tags-input'
-export { TagsInput } from './components/ui/tags-input'
+export { Spinner } from './components/primitives/spinner'
+export type { StatCardProps } from './components/primitives/stat-card'
+export { StatCard } from './components/primitives/stat-card'
+export { Switch } from './components/primitives/switch'
+export type {
+  SegmentedControlProps,
+  SegmentedOption,
+} from './components/primitives/segmented-control'
+export { SegmentedControl } from './components/primitives/segmented-control'
+export type { TagsInputProps } from './components/primitives/tags-input'
+export { TagsInput } from './components/primitives/tags-input'
 // Table
 export {
   Table,
@@ -224,17 +231,17 @@ export {
   TableHead,
   TableHeader,
   TableRow,
-} from './components/ui/table'
+} from './components/primitives/table'
 // Navigation Components
-export { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs'
-export type { TextareaProps } from './components/ui/textarea'
-export { Textarea } from './components/ui/textarea'
-export { Toaster, toast } from './components/ui/toast'
+export { Tabs, TabsContent, TabsList, TabsTrigger } from './components/primitives/tabs'
+export type { TextareaProps } from './components/primitives/textarea'
+export { Textarea } from './components/primitives/textarea'
+export { Toaster, toast } from './components/primitives/toast'
 export {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from './components/ui/tooltip'
-export { formatFt, formatRovid, formatSzam, formatSzazalek } from './lib/format'
-export { cn } from './lib/utils'
+} from './components/primitives/tooltip'
+export { formatFt, formatRovid, formatSzam, formatSzazalek } from './utils/format-hu'
+export { cn } from './utils/cn'

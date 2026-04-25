@@ -4,6 +4,129 @@ All notable changes to the Vikingo Design System.
 
 ---
 
+## [0.8.0] – 2026-04-25
+
+Web Components — first batch.
+
+### New: `@vikingo/ui/html`
+
+Importable as a single ES module that registers all `<vk-*>` Custom Elements:
+
+```html
+<script type="module" src="@vikingo/ui/html"></script>
+```
+
+Or programmatically:
+
+```ts
+import { vkToast } from '@vikingo/ui/html'
+vkToast.success('Mentve')
+```
+
+### Components shipped
+
+| Element | Description | Form-associated |
+|---|---|---|
+| `<vk-switch>` | Toggle | ✓ |
+| `<vk-checkbox>` | Checkbox with `indeterminate` tri-state | ✓ |
+| `<vk-radio-group>` + `<vk-radio>` | Radio set with roving tabindex | — |
+| `<vk-tooltip>` | Hover/focus reveal | — |
+| `<vk-tabs>` + `<vk-tab>` | Tab list with arrow-key navigation | — |
+| `<vk-accordion>` + `<vk-accordion-item>` | Collapsible panels (single or multiple open) | — |
+| `<vk-dialog>` | Modal built on native `<dialog>` (focus trap + backdrop free) | — |
+| `<vk-toast-host>` + `vkToast()` | Toast notifications with imperative API | — |
+
+All components implement keyboard navigation and ARIA semantics. Style via the `vk-*` class hooks in `vanilla.css` plus host-level `:host` styles in each Web Component.
+
+### Bundle
+
+- `dist/html.mjs` ≈ 38 KB raw / **7.3 KB gzipped** for all 8 elements.
+- Zero runtime dependencies — vanilla `HTMLElement` + Shadow DOM where needed.
+- No React.
+
+### What's still missing
+
+The complex interactive components — `vk-drawer`, `vk-popover`, `vk-dropdown-menu`, `vk-combobox`, `vk-date-picker`, `vk-data-table`, `vk-command-palette`, `vk-slider`, `vk-tags-input`, `vk-file-upload` — ship in **v0.9**.
+
+### Fixes inside this release
+
+- `.vk-chip--selected:hover` now keeps its filled accent style. Previously the unselected `.vk-chip:hover` rule (specificity 0,2,0) overrode the selected rule (0,1,0), so a selected chip "unfilled" on hover.
+
+---
+
+## [0.7.0] – 2026-04-25
+
+Vanilla HTML target — first cut.
+
+### New: `@vikingo/ui/styles/vanilla`
+
+- `packages/ui/src/styles/vanilla.css` — pre-compiled component styles for plain HTML projects (no React, no Tailwind).
+- `vk-` prefixed BEM-style class names: `vk-button vk-button--primary`, `vk-card vk-card__header`, etc.
+- Coverage (19 presentation components): Button, Badge, Chip, Card, Alert, Avatar, Breadcrumb, Separator, Spinner, Progress, Skeleton, EmptyState, MetricRow, PageHeader, StatCard, ChartCard, ImageCard, Pagination, SegmentedControl, plus form base (Input, Textarea, Label).
+- Bundle: ~26KB raw / ~5.5KB gzipped (incl. inlined tokens).
+- Light + dark mode via `<html class="dark">` (same toggle as React).
+
+### Demo
+
+- `templates/html/example.html` — copy-paste vanilla HTML page using the new CSS. Open it in a browser to see all 19 components without any build pipeline.
+
+### What's still missing
+
+Interactive components (Dialog, Drawer, DropdownMenu, Combobox, DatePicker, DataTable, Tabs, Accordion, Tooltip, Switch, Checkbox, RadioGroup, Slider, Toast, …) need JS + ARIA + keyboard handling. They ship as Web Components (`<vk-dialog>`, `<vk-tabs>`) in **v0.8+** under `@vikingo/ui/html`.
+
+---
+
+## [0.6.0] – 2026-04-25
+
+This release renames folders and files for clarity, splits the design tokens into a single source of truth, and reorganizes the documentation around the question *"how do I load this into another project?"* No component APIs changed; the React surface is fully backwards-compatible.
+
+### Source structure (renames)
+
+- `packages/ui/src/components/ui/` → `packages/ui/src/components/primitives/` — eliminates the triple-`ui` redundancy (`packages/ui/components/ui/`).
+- `packages/ui/src/lib/` → `packages/ui/src/utils/` — `lib/` was a catch-all; `utils/` describes what's actually there.
+  - `lib/utils.ts` (only `cn()`) → `utils/cn.ts`.
+  - `lib/format.ts` (Hungarian formatters) → `utils/format-hu.ts`.
+- `packages/ui/src/components/primitives/search.tsx` → `search-bar.tsx` — file name now matches the `SearchBar` component it exports.
+- `apps/storybook/stories/ui/` → `apps/storybook/stories/primitives/` — same convention as the source.
+
+These are internal — public exports from `@vikingo/ui` are unchanged.
+
+### CSS distribution (renames + tokens.css)
+
+- New: `packages/ui/src/styles/tokens.css` — single source of truth for all CSS custom properties (`--color-*`, `--radius-*`, `--font-*`, `--duration-*`, …). Both React entry CSS files now `@import` it. Fixes a real drift: `globals.css` and `globals-no-cdn.css` had different `--transition-*` values in 0.5.x.
+- Renamed for clarity:
+  - `globals.css` → `react.css`
+  - `globals-no-cdn.css` → `react-offline.css`
+  - `google-fonts.css` → `fonts/inter-cdn.css`
+  - `fonts.css` → `fonts/inter-bundled.css`
+- New internal partial: `_react-base.css` — Tailwind v4 `@theme` bridge, Radix UI animations, base styles. Imported by both `react.css` and `react-offline.css` so they can never drift again.
+- New `package.json` exports: `./styles/react`, `./styles/react-offline`, `./styles/tokens`, `./fonts/inter-cdn`, `./fonts/inter-bundled`.
+- **Deprecated aliases (still work, removed in v1.0):** `./styles`, `./styles/no-cdn`, `./styles/google-fonts`, `./fonts`. Keep your existing imports working without changes.
+
+### Documentation rewrite
+
+- `README.md` rewritten — the question *"how do I load this into another project?"* is now answered in the first 30 lines via a platform table.
+- New `templates/<platform>/{CLAUDE.md, README.md}` per-platform structure (was `docs/presets/*.md` and `CONSUMER_CLAUDE.md` at root).
+- New canonical reference docs:
+  - `docs/components.md` — single component catalog (templates link here instead of duplicating)
+  - `docs/styling.md` — tokens, dark mode, `cn()`, overrides
+  - `docs/patterns.md` — common compositions
+  - `docs/ARCHITECTURE.md` — repo layout, build pipeline, CSS distribution
+  - `docs/TROUBLESHOOTING.md` — integration FAQ
+- New `packages/ui/README.md` and `apps/storybook/README.md`.
+- `CONTRIBUTING.md` extended with a "Comments & JSDoc" section and updated paths.
+- Old paths kept as redirect stubs for one release: `CONSUMER_CLAUDE.md`, `docs/presets/*.md`.
+
+### Vanilla HTML (preview)
+
+- `templates/html/{CLAUDE.md, README.md}` added — describes the upcoming v0.7+ vanilla HTML target. v0.6.x already ships standalone `tokens.css` for use in non-React projects; static `vikingo.css` and `<vk-*>` Web Components arrive in v0.7 / v0.8.
+
+### Migration
+
+No breaking changes for React consumers. The deprecated CSS imports keep working. If you have internal scripts or AI agents that referenced the old folder names (`components/ui/`, `lib/utils`), update them — see the renames above.
+
+---
+
 ## [0.5.1] – 2026-04-21
 
 ### Fix

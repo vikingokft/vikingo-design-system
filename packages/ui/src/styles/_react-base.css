@@ -1,0 +1,221 @@
+/*
+ * Vikingo Design System — React + Tailwind v4 base styles (internal partial)
+ *
+ * Imported by react.css and react-offline.css.
+ * Do not import this file directly — use one of those entry points.
+ *
+ * Contents:
+ *   - Tailwind v4 @theme bridge (CSS tokens → Tailwind utilities)
+ *   - Radix UI overlay animations (animate-in/out, slide-in/out, fade-in/out, zoom)
+ *   - Accordion animations
+ *   - Global base styles (typography, focus, scrollbar, selection, reduced-motion)
+ *
+ * Requires: tokens.css and Tailwind v4 already imported.
+ */
+
+.btn-press:active {
+  box-shadow: 0 0 0 3px var(--color-accent-muted);
+}
+
+/* ===== TAILWIND v4 THEME BRIDGE ===== */
+@theme inline {
+  /* Colors */
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-subtle: var(--color-text-subtle);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-muted: var(--color-accent-muted);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+  --color-info: var(--color-info);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-text: var(--sidebar-text);
+
+  /* Fonts */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  /* Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+}
+
+/* ===== ENTER / EXIT ANIMATIONS (Radix UI overlay components) ===== */
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform:
+      translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0)
+      scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1))
+      rotate(var(--tw-enter-rotate, 0));
+  }
+}
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform:
+      translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0)
+      scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1))
+      rotate(var(--tw-exit-rotate, 0));
+  }
+}
+
+/* Registered as @utility so data-state variants (data-[state=open]:animate-in etc.) work in Tailwind v4 */
+@utility animate-in {
+  animation-name: enter;
+  animation-duration: var(--duration-fast);
+  animation-timing-function: var(--ease-out-quint);
+  animation-fill-mode: both;
+  --tw-enter-opacity: initial;
+  --tw-enter-scale: initial;
+  --tw-enter-rotate: initial;
+  --tw-enter-translate-x: initial;
+  --tw-enter-translate-y: initial;
+}
+@utility animate-out {
+  animation-name: exit;
+  animation-duration: var(--duration-fast);
+  animation-timing-function: var(--ease-out-quint);
+  animation-fill-mode: both;
+  --tw-exit-opacity: initial;
+  --tw-exit-scale: initial;
+  --tw-exit-rotate: initial;
+  --tw-exit-translate-x: initial;
+  --tw-exit-translate-y: initial;
+}
+@utility fade-in-0  { --tw-enter-opacity: 0; }
+@utility fade-out-0 { --tw-exit-opacity: 0; }
+@utility zoom-in-95  { --tw-enter-scale: 0.95; }
+@utility zoom-out-95 { --tw-exit-scale: 0.95; }
+@utility slide-in-from-top-2    { --tw-enter-translate-y: -0.5rem; }
+@utility slide-in-from-bottom-2 { --tw-enter-translate-y:  0.5rem; }
+@utility slide-in-from-left-2   { --tw-enter-translate-x: -0.5rem; }
+@utility slide-in-from-right-2  { --tw-enter-translate-x:  0.5rem; }
+@utility slide-in-from-top-4    { --tw-enter-translate-y: -1rem; }
+@utility slide-out-to-top-4     { --tw-exit-translate-y:  -1rem; }
+
+/* Drawer animations */
+@utility slide-in-from-right-full  { --tw-enter-translate-x:  100%; }
+@utility slide-in-from-left-full   { --tw-enter-translate-x: -100%; }
+@utility slide-in-from-bottom-full { --tw-enter-translate-y:  100%; }
+@utility slide-out-to-right-full   { --tw-exit-translate-x:  100%; }
+@utility slide-out-to-left-full    { --tw-exit-translate-x: -100%; }
+@utility slide-out-to-bottom-full  { --tw-exit-translate-y:  100%; }
+
+/* Dialog animations — static classes because / and % are not valid in @utility names */
+.slide-in-from-left-1\/2     { --tw-enter-translate-x: -50%; }
+.slide-in-from-top-\[48\%\]  { --tw-enter-translate-y: -48%; }
+.slide-out-to-left-1\/2      { --tw-exit-translate-x: -50%; }
+.slide-out-to-top-\[48\%\]   { --tw-exit-translate-y: -48%; }
+
+/* ===== ACCORDION ANIMATIONS ===== */
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+.animate-accordion-down {
+  animation: accordion-down var(--duration-base) var(--ease-out-quint);
+}
+.animate-accordion-up {
+  animation: accordion-up var(--duration-base) var(--ease-out-quint);
+}
+
+/* ===== GLOBAL BASE STYLES ===== */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  h5, h6 {
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
+
+  code, kbd, samp, pre {
+    font-family: var(--font-mono);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: var(--radius-full);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-subtle);
+  }
+
+  ::selection {
+    background: var(--color-accent-muted);
+    color: var(--color-text);
+  }
+
+  /* ===== REDUCED MOTION =====
+   * Honors the OS-level `prefers-reduced-motion: reduce` setting.
+   * The `.force-reduce-motion` class lets Storybook (or consumers) opt into the
+   * same behavior without changing OS settings — useful for preview toggles.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  .force-reduce-motion,
+  .force-reduce-motion *,
+  .force-reduce-motion *::before,
+  .force-reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

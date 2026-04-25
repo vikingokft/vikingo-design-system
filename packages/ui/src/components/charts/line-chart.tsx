@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { cn } from '../../lib/utils'
+import { cn } from '../../utils/cn'
 import { formatAxisY, formatDatumRovid } from './chart-utils'
 
 export interface LineConfig {

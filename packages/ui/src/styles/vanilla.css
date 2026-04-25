@@ -1,0 +1,581 @@
+/*
+ * Vikingo Design System — Vanilla CSS
+ *
+ * Pre-compiled component styles for plain HTML projects (no React, no Tailwind).
+ * Class names are namespaced with `vk-` to avoid collisions with consumer CSS.
+ * Variant convention: BEM-style — `vk-button vk-button--primary vk-button--lg`.
+ *
+ * Consumer import:
+ *   <link rel="stylesheet" href="@vikingo/ui/styles/tokens.css">
+ *   <link rel="stylesheet" href="@vikingo/ui/styles/vanilla.css">
+ *
+ * Coverage: 19 presentation components — buttons, badges, cards, alerts, avatars,
+ * breadcrumbs, separators, spinners, progress, skeletons, empty state, metric row,
+ * page header, stat card, chart card wrapper, image card, pagination, segmented
+ * control, chips. Form base (input, label, textarea) included for completeness.
+ *
+ * Interactive components (Dialog, Tabs, Combobox, …) ship as Web Components in
+ * @vikingo/ui/html (v0.8+).
+ */
+
+@import "./tokens.css";
+
+/* ============================================================================
+ * BASE — minimal reset that adopts our tokens
+ * ============================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; margin: 0; }
+h5, h6 { font-family: var(--font-body); font-weight: 600; margin: 0; }
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--color-accent-muted);
+  color: var(--color-text);
+}
+
+/* ============================================================================
+ * BUTTON — vk-button
+ * Variants: primary | secondary | ghost | destructive | outline | link
+ * Sizes:    sm | md (default) | lg | xl | icon | icon-sm
+ * ============================================================================ */
+
+.vk-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  height: 2.5rem;
+  padding: 0 var(--spacing-md);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--duration-fast) var(--ease-out-quint),
+              box-shadow var(--duration-fast) var(--ease-out-quint),
+              border-color var(--duration-fast) var(--ease-out-quint);
+}
+.vk-button:disabled,
+.vk-button[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+
+.vk-button--primary {
+  background: var(--color-accent);
+  color: var(--color-accent-foreground);
+  box-shadow: var(--shadow-sm);
+}
+.vk-button--primary:hover { background: var(--color-accent-hover); box-shadow: var(--shadow-md); }
+.vk-button--primary:active { box-shadow: 0 0 0 3px var(--color-accent-muted); }
+
+.vk-button--secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+.vk-button--secondary:hover { background: var(--color-bg); border-color: var(--color-border-strong); box-shadow: var(--shadow-md); }
+
+.vk-button--ghost { color: var(--color-text); }
+.vk-button--ghost:hover { background: var(--color-accent-muted); color: var(--color-accent); }
+
+.vk-button--destructive {
+  background: var(--color-error);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+.vk-button--destructive:hover { filter: brightness(0.95); box-shadow: var(--shadow-md); }
+
+.vk-button--outline {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.vk-button--outline:hover { background: var(--color-accent-muted); box-shadow: var(--shadow-sm); }
+
+.vk-button--link {
+  background: transparent;
+  color: var(--color-accent);
+  padding: 0;
+  height: auto;
+  border-color: transparent;
+}
+.vk-button--link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.vk-button--sm { height: 2rem;   padding: 0 var(--spacing-sm); font-size: 0.875rem; }
+.vk-button--lg { height: 3rem;   padding: 0 var(--spacing-lg); font-size: 1rem; }
+.vk-button--xl { height: 3.5rem; padding: 0 var(--spacing-xl); font-size: 1rem; }
+.vk-button--icon    { height: 2.5rem; width: 2.5rem; padding: 0; }
+.vk-button--icon-sm { height: 2rem;   width: 2rem;   padding: 0; }
+
+/* ============================================================================
+ * BADGE — vk-badge
+ * Variants: default | success | warning | error | info | muted
+ * ============================================================================ */
+
+.vk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  line-height: 1.25rem;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+}
+.vk-badge--success { background: var(--color-success-muted); color: var(--color-success); }
+.vk-badge--warning { background: var(--color-warning-muted); color: var(--color-warning); }
+.vk-badge--error   { background: var(--color-error-muted);   color: var(--color-error); }
+.vk-badge--info    { background: var(--color-info-muted);    color: var(--color-info); }
+.vk-badge--muted   { background: var(--color-bg);             color: var(--color-text-muted); border: 1px solid var(--color-border); }
+
+/* ============================================================================
+ * CHIP — vk-chip / vk-chip-group
+ * ============================================================================ */
+
+.vk-chip-group { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); }
+
+.vk-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out-quint);
+}
+.vk-chip:hover { background: var(--color-bg); }
+.vk-chip[aria-pressed="true"],
+.vk-chip--selected {
+  background: var(--color-accent);
+  color: var(--color-accent-foreground);
+  border-color: var(--color-accent);
+}
+/* Selected hover needs equal specificity to .vk-chip:hover (0,2,0) — without
+ * this, the unselected hover rule wins and the selected chip "unfills" on hover. */
+.vk-chip[aria-pressed="true"]:hover,
+.vk-chip--selected:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-accent-foreground);
+}
+
+/* ============================================================================
+ * CARD — vk-card / __header / __body / __footer
+ * ============================================================================ */
+
+.vk-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.vk-card__header { padding: var(--spacing-lg); border-bottom: 1px solid var(--color-border); }
+.vk-card__title  { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; }
+.vk-card__description { color: var(--color-text-muted); font-size: 0.875rem; margin-top: var(--spacing-xs); }
+.vk-card__body   { padding: var(--spacing-lg); }
+.vk-card__footer { padding: var(--spacing-lg); border-top: 1px solid var(--color-border); display: flex; gap: var(--spacing-sm); justify-content: flex-end; }
+
+/* ============================================================================
+ * ALERT — vk-alert
+ * Variants: info | success | warning | error
+ * ============================================================================ */
+
+.vk-alert {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-info-muted);
+  color: var(--color-text);
+}
+.vk-alert--success { background: var(--color-success-muted); border-color: var(--color-success); }
+.vk-alert--warning { background: var(--color-warning-muted); border-color: var(--color-warning); }
+.vk-alert--error   { background: var(--color-error-muted);   border-color: var(--color-error); }
+.vk-alert__icon  { flex-shrink: 0; width: 1.25rem; height: 1.25rem; margin-top: 0.125rem; }
+.vk-alert__title { font-weight: 600; margin: 0 0 var(--spacing-xs) 0; }
+.vk-alert__description { color: var(--color-text-muted); font-size: 0.875rem; margin: 0; }
+
+/* ============================================================================
+ * AVATAR — vk-avatar
+ * Sizes: sm | md (default) | lg | xl
+ * ============================================================================ */
+
+.vk-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 0.875rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.vk-avatar img,
+.vk-avatar__image { width: 100%; height: 100%; object-fit: cover; }
+.vk-avatar--sm { width: 2rem;   height: 2rem;   font-size: 0.75rem; }
+.vk-avatar--lg { width: 3rem;   height: 3rem;   font-size: 1rem; }
+.vk-avatar--xl { width: 4rem;   height: 4rem;   font-size: 1.125rem; }
+
+/* ============================================================================
+ * BREADCRUMB — vk-breadcrumb
+ * ============================================================================ */
+
+.vk-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+.vk-breadcrumb ol { display: flex; gap: var(--spacing-xs); list-style: none; padding: 0; margin: 0; align-items: center; }
+.vk-breadcrumb__item { display: inline-flex; align-items: center; gap: var(--spacing-xs); }
+.vk-breadcrumb__link { color: var(--color-text-muted); text-decoration: none; }
+.vk-breadcrumb__link:hover { color: var(--color-text); }
+.vk-breadcrumb__separator { color: var(--color-text-subtle); }
+.vk-breadcrumb__page { color: var(--color-text); font-weight: 500; }
+
+/* ============================================================================
+ * SEPARATOR — vk-separator
+ * Orientation: horizontal (default) | vertical
+ * ============================================================================ */
+
+.vk-separator {
+  background: var(--color-border);
+  border: none;
+  margin: 0;
+}
+.vk-separator[role="separator"][aria-orientation="horizontal"],
+.vk-separator--horizontal { width: 100%; height: 1px; }
+.vk-separator[aria-orientation="vertical"],
+.vk-separator--vertical { width: 1px; height: 100%; }
+
+/* ============================================================================
+ * SPINNER — vk-spinner
+ * Sizes: sm | md (default) | lg
+ * ============================================================================ */
+
+.vk-spinner {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: var(--radius-full);
+  animation: vk-spinner-rotate 0.8s linear infinite;
+}
+.vk-spinner--sm { width: 1rem;    height: 1rem;    border-width: 2px; }
+.vk-spinner--lg { width: 2rem;    height: 2rem;    border-width: 3px; }
+@keyframes vk-spinner-rotate { to { transform: rotate(360deg); } }
+
+/* ============================================================================
+ * PROGRESS — vk-progress
+ * ============================================================================ */
+
+.vk-progress {
+  width: 100%;
+  height: 0.5rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.vk-progress__bar {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-base) var(--ease-out-quint);
+}
+
+/* ============================================================================
+ * SKELETON — vk-skeleton (and -text / -circle / -button / -card variants)
+ * ============================================================================ */
+
+.vk-skeleton {
+  display: block;
+  background: linear-gradient(90deg, var(--color-bg) 0%, var(--color-border) 50%, var(--color-bg) 100%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-sm);
+  animation: vk-skeleton-shimmer 1.5s ease-in-out infinite;
+}
+.vk-skeleton-text   { height: 1rem; width: 100%; border-radius: var(--radius-sm); }
+.vk-skeleton-circle { width: 2.5rem; height: 2.5rem; border-radius: var(--radius-full); }
+.vk-skeleton-button { height: 2.5rem; width: 6rem; border-radius: var(--radius-md); }
+.vk-skeleton-card   { height: 8rem;  width: 100%; border-radius: var(--radius-lg); }
+@keyframes vk-skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================================================
+ * EMPTY STATE — vk-empty-state
+ * ============================================================================ */
+
+.vk-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+  gap: var(--spacing-md);
+  color: var(--color-text);
+}
+.vk-empty-state__icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--color-text-subtle);
+  margin-bottom: var(--spacing-sm);
+}
+.vk-empty-state__title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; }
+.vk-empty-state__description { color: var(--color-text-muted); max-width: 28rem; font-size: 0.875rem; }
+.vk-empty-state__action { margin-top: var(--spacing-sm); }
+
+/* ============================================================================
+ * METRIC ROW — vk-metric-row
+ * ============================================================================ */
+
+.vk-metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.vk-metric-row:last-child { border-bottom: none; }
+.vk-metric-row__label { color: var(--color-text-muted); font-size: 0.875rem; }
+.vk-metric-row__value { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ============================================================================
+ * PAGE HEADER — vk-page-header
+ * ============================================================================ */
+
+.vk-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--spacing-xl);
+}
+.vk-page-header__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; }
+.vk-page-header__description { color: var(--color-text-muted); margin-top: var(--spacing-xs); }
+.vk-page-header__actions { display: flex; gap: var(--spacing-sm); }
+
+/* ============================================================================
+ * STAT CARD — vk-stat-card
+ * Trend: up (green) | down (red) | flat (muted)
+ * ============================================================================ */
+
+.vk-stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+.vk-stat-card__header { display: flex; align-items: center; gap: var(--spacing-sm); color: var(--color-text-muted); font-size: 0.875rem; }
+.vk-stat-card__icon { width: 1.25rem; height: 1.25rem; }
+.vk-stat-card__value { font-family: var(--font-display); font-size: 1.875rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.vk-stat-card__change { display: inline-flex; align-items: center; gap: var(--spacing-xs); font-size: 0.875rem; font-weight: 500; }
+.vk-stat-card__change--up   { color: var(--color-success); }
+.vk-stat-card__change--down { color: var(--color-error); }
+.vk-stat-card__change--flat { color: var(--color-text-muted); }
+
+/* ============================================================================
+ * CHART CARD — vk-chart-card (wrapper only — chart renders inside)
+ * ============================================================================ */
+
+.vk-chart-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+.vk-chart-card__header { margin-bottom: var(--spacing-md); }
+.vk-chart-card__title  { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; }
+.vk-chart-card__description { color: var(--color-text-muted); font-size: 0.875rem; margin-top: var(--spacing-xs); }
+.vk-chart-card__body { min-height: 16rem; }
+
+/* ============================================================================
+ * IMAGE CARD — vk-image-card
+ * ============================================================================ */
+
+.vk-image-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.vk-image-card__image { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.vk-image-card__body  { padding: var(--spacing-md); }
+.vk-image-card__title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+.vk-image-card__description { color: var(--color-text-muted); font-size: 0.875rem; margin-top: var(--spacing-xs); }
+
+/* ============================================================================
+ * PAGINATION — vk-pagination
+ * ============================================================================ */
+
+.vk-pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+.vk-pagination__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 var(--spacing-sm);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out-quint);
+}
+.vk-pagination__item:hover { background: var(--color-bg); }
+.vk-pagination__item[aria-current="page"],
+.vk-pagination__item--active {
+  background: var(--color-accent);
+  color: var(--color-accent-foreground);
+}
+.vk-pagination__ellipsis { color: var(--color-text-subtle); padding: 0 var(--spacing-xs); }
+
+/* ============================================================================
+ * SEGMENTED CONTROL — vk-segmented
+ * ============================================================================ */
+
+.vk-segmented {
+  display: inline-flex;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.25rem;
+  gap: 0.125rem;
+}
+.vk-segmented__option {
+  padding: 0.375rem var(--spacing-md);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out-quint),
+              color var(--duration-fast) var(--ease-out-quint);
+}
+.vk-segmented__option[aria-pressed="true"],
+.vk-segmented__option--active {
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================================
+ * FORM BASE — vk-input / vk-textarea / vk-label / vk-form-field
+ * Included so that simple forms work without React. Interactive form components
+ * (Combobox, DatePicker, Select with search) need Web Components — see v0.8+.
+ * ============================================================================ */
+
+.vk-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.vk-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+.vk-label--required::after { content: ' *'; color: var(--color-error); }
+
+.vk-input,
+.vk-textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem var(--spacing-sm);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-fast) var(--ease-out-quint),
+              box-shadow var(--duration-fast) var(--ease-out-quint);
+}
+.vk-input:hover,
+.vk-textarea:hover { border-color: var(--color-border-strong); }
+.vk-input:focus,
+.vk-textarea:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-accent-muted);
+}
+.vk-input:disabled,
+.vk-textarea:disabled { opacity: 0.6; cursor: not-allowed; background: var(--color-bg); }
+.vk-textarea { min-height: 6rem; resize: vertical; }
+
+.vk-input--error,
+.vk-textarea--error { border-color: var(--color-error); }
+.vk-input--error:focus,
+.vk-textarea--error:focus { box-shadow: 0 0 0 3px var(--color-error-muted); }
+
+.vk-form-field__hint  { font-size: 0.75rem; color: var(--color-text-muted); }
+.vk-form-field__error { font-size: 0.75rem; color: var(--color-error); }
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

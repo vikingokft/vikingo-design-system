@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { cn } from '../../lib/utils'
-import { TooltipProvider } from '../ui/tooltip'
+import { cn } from '../../utils/cn'
+import { TooltipProvider } from '../primitives/tooltip'
 import { PageLayoutContext } from './page-layout-context'
 
 export interface PageLayoutProps {
